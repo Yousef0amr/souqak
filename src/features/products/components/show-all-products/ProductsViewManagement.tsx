@@ -46,10 +46,8 @@ const ProductsViewManagement = ({ showFilter = true, children }: ProductsViewMan
                         <ProductFilters
                             search=""
                             setSearch={() => { }}
-                            categories={[]}
                             category=""
                             setCategory={() => { }}
-                            statuses={[]}
                             statusFilter=""
                             setStatusFilter={() => { }}
                             minPrice=""
@@ -58,6 +56,7 @@ const ProductsViewManagement = ({ showFilter = true, children }: ProductsViewMan
                             setMaxPrice={() => { }}
                             dateRange={undefined}
                             setDateRange={() => { }}
+                            onResetFilters={() => { }}
                         />
 
                     </div>

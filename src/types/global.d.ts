@@ -49,7 +49,40 @@ declare global {
         extends TablePaginationPerPageProps,
         DataListPaginationProps { }
 
+    interface SelectOption {
+        label: string;
+        value: string;
+    }
 
+    interface CustomSelectProps {
+        value?: SelectOption | SelectOption[] | null;
+        // onChange?: (selected: SelectOption | SelectOption[] | null) => void;
+        onChange?: (selected: SelectOption | SelectOption[] | null | value) => void; // added value type for filter condigition check
+        options?: SelectOption[];
+        placeholder?: string;
+        isMulti?: boolean;
+        isCreatable?: boolean;
+        fetchOptions?: (input: string) => Promise<SelectOption[]>;
+        disabledOptions?: string[];
+        disabled?: boolean;
+        isLoading?: boolean;
+        styleSettings?: {
+            selectBoxClassName?: string;
+            searchClassName?: string;
+            tagValueClassName?: string;
+        };
+        error?: boolean;
+        dropdownPosition?: "top" | "bottom";
+    }
+
+    interface DefaultSelectProps {
+        options: SelectOption[] | [];
+        onChange: (value: string) => void;
+        placeholder?: string;
+        elementWidth?: string;
+        withCheckIcon?: boolean;
+        defValue?: string | number;
+    }
 
     type ModalState = {
         isOpen: boolean;
