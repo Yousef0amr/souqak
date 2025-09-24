@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
+import { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // to ignore ts & eslint errors in build -> to test in local -> don't active them 👍
+  // typescript: {
+  //   ignoreBuildErrors: true,
+  // },
+  // eslint: {
+  //   ignoreDuringBuilds: true,
+  // },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./src/config/i18n/request.ts");
+export default withNextIntl(nextConfig);

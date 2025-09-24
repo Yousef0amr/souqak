@@ -1,0 +1,72 @@
+import type { Column, ColumnDef, VisibilityState } from "@tanstack/react-table";
+import type { ReactNode } from "react";
+
+
+declare global {
+    interface DataTableProps<TData> {
+        data: TData[];
+        columns: ColumnDef<TData>[];
+        columnVisibility: VisibilityState;
+        isLoading: boolean;
+        setColumnVisibility: React.Dispatch<React.SetStateAction<VisibilityState>>;
+        wrapperClassName?: string;
+        bodyClassName?: string;
+        headerClassName?: string;
+        withPagination?: boolean;
+        scrollAreaClassName?: string;
+    }
+    interface TableColumnHeaderProps<TData> {
+        column: Column<TData, unknown>;
+        columnName: string;
+        columnContent?: () => ReactNode;
+        sortable?: boolean;
+    }
+
+    interface TablePagination {
+        page: number;
+        perPage: number;
+        total: number;
+    }
+
+
+    interface DataListPaginationProps {
+        total: number;
+        perPage: number;
+        currentPage: number;
+        onPageChange: (page: number) => void;
+    }
+
+    interface TablePaginationPerPageProps {
+        total: number;
+        onPerPageChange: (perPage: number, fixedPage: number) => void;
+        label?: string;
+        perPage: number;
+        fixedPerPage?: number;
+        hidePagination?: boolean;
+    }
+
+    interface PaginationWithPerPageProps
+        extends TablePaginationPerPageProps,
+        DataListPaginationProps { }
+
+
+
+    type ModalState = {
+        isOpen: boolean;
+        componentName: string | null;
+        modalTitle: string | null;
+        modalDescription: string | null;
+        withCloseBtn: boolean;
+        modalWithFooter: boolean;
+        modalFooterContent: React.ReactNode | null;
+        modalContentClassName: string | null;
+        hideModalTitle: boolean;
+        enableOutsideClick: boolean;
+        mode?: "dialog" | "sheet";
+        sheetSide?: "right" | "left" | "top" | "bottom";
+        openModal: (settings: Partial<Omit<ModalState, 'openModal' | 'closeModal'>>) => void;
+        closeModal: () => void;
+    };
+
+
+}
