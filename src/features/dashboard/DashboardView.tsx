@@ -90,8 +90,8 @@ export const DashboardView = () => {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <RevenueChart data={data.chartData.revenue} />
-        <UserGrowthChart data={data.chartData.users} />
+        <RevenueChart data={data.chartData.revenue as any} />
+        <UserGrowthChart data={data.chartData.users as any} />
       </div>
 
       {/* Product Overview */}
