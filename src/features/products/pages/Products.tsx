@@ -30,7 +30,10 @@ export default function ProductsPage() {
                     modalTitle: "Add Product",
                     withCloseBtn: true,
                     enableOutsideClick: false,
-                    mode: "sheet"
+                    mode: "dialog",
+                    modalContentClassName: "p-4 sm:max-w-[600px] lg:max-w-[900px] xl:max-w-[1200px] 2xl:max-w-[1400px]",
+
+
                 })} >
                     <Plus className="size-4 mr-2" />Add product
                 </Button>

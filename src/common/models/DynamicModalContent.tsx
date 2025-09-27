@@ -38,7 +38,7 @@ export function DynamicModalContent() {
     modalContentClassName,
     hideModalTitle,
     enableOutsideClick,
-    mode = "dialog", // default
+    mode = "dialog",
     sheetSide = "right",
   } = useModalStore();
 
@@ -93,7 +93,7 @@ export function DynamicModalContent() {
           else e.preventDefault();
         }}
         className={cn(
-          "sm:max-w-[600px] overflow-hidden",
+          " overflow-hidden",
           modalContentClassName,
           withCloseBtn ? "" : "[&>button]:hidden",
         )}
