@@ -1,119 +1,90 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/common/shared/card"
-import { Upload } from "lucide-react"
-import { Input } from "@/common/forms/input"
-import { Label } from "@/common/shared/label"
-import { Textarea } from "@/common/shared/textarea"
-import { Button } from "@/common/buttons/button"
-import CustomSelect from "@/common/forms/CustomSelect"
-import { Switch } from "@/common/forms/switch"
-import VariantsSection from "./VariantsSection"
+import { useForm } from "react-hook-form";
+import { Form } from "@/common/forms/form";
+import ProductInfoSection from "./ProductInfoSection";
+import VariantInfoSection from "./VariantInfoSection";
+import ButtonWithIconLabel from "@/common/buttons/button-icon-label";
+import { Plus, Trash2 } from "lucide-react";
+import { useAddProductStore } from "../../stores/useAddProductStore";
+import { Button } from "@/common/buttons/button";
 
 export default function ProductForm() {
-  const [inStock, setInStock] = useState(true)
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      category: "",
+      sku: "",
+      description: "",
+      department: "",
+      brand: "",
+      subcategory: "",
+      variant_sku: "",
+      color: "",
+      size: "",
+      barcode: "",
+      costPrice: "",
+      retailPrice: "",
+    },
+  });
+
+  const { reset, getValues, handleSubmit, control } = form;
+
+  const { addProduct, products } = useAddProductStore();
+
+  const onSubmit = (values: any) => {
+    const productData = {
+      brand: values.brand.value as string,
+      category: values.category.value as string,
+      department: values.department.value as string,
+      subcategory: values.subcategory.value as string,
+      name: values.name as string,
+      sku: values.sku as string,
+      description: values.description as string,
+      variant: {
+        id: values.id as string,
+        variant_sku: values.variant_sku as string,
+        color: values.color as string,
+        size: values.size as string,
+        barcode: values.barcode as string,
+        costPrice: values.costPrice as number,
+        retailPrice: values.retailPrice as number,
+      },
+    };
+
+    console.log("Form Submitted", { ...values });
+
+    addProduct(productData);
+
+    reset();
+  };
+
+  const clearAll = () => reset();
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
-      {/* Left column */}
-      <div className="lg:col-span-2 space-y-6">
+    <Form {...form}>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+        {/* Product Section */}
+        <ProductInfoSection control={control} />
+        {/* Variant Section */}
+        <VariantInfoSection control={control} />
 
-        {/* Product Details */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Product Details</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Enter product name" />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="sku">SKU</Label>
-                <Input id="sku" placeholder="Enter SKU" />
-              </div>
-              <div>
-                <Label htmlFor="barcode">Barcode</Label>
-                <Input id="barcode" placeholder="Enter barcode" />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="description">Description (Optional)</Label>
-              <Textarea id="description" placeholder="Set a description to the product for better visibility." />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Product Images */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Product Images</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-2 m-4">
-            <Upload className="h-10 w-10 text-muted-foreground mb-2" />
-            <p className="text-sm text-muted-foreground">Drop your images here</p>
-            <p className="text-xs text-muted-foreground mb-3">PNG or JPG (max. 5MB)</p>
-            <Button variant="outline">Select images</Button>
-          </CardContent>
-        </Card>
-
-        <VariantsSection />
-
-      </div>
-
-      {/* Right column */}
-      <div className="space-y-6">
-
-        {/* Pricing */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Pricing</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="basePrice">Base Price</Label>
-              <Input id="basePrice" placeholder="0.00" type="number" />
-            </div>
-            <div>
-              <Label htmlFor="discountPrice">Discounted Price</Label>
-              <Input id="discountPrice" placeholder="0.00" type="number" />
-            </div>
-            <div className="flex items-center space-x-2">
-              <Switch id="tax" />
-              <Label htmlFor="tax">Charge tax on this product</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Switch checked={inStock} onCheckedChange={setInStock} />
-              <Label>In stock</Label>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Status */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Status</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CustomSelect options={[{ label: 'Active', value: 'active' }, { label: 'Draft', value: 'draft' }]} />
-          </CardContent>
-        </Card>
-
-        {/* Categories */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Categories</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <CustomSelect options={[{ label: 'Mobiles', value: 'mobiles' }, { label: 'Laptops', value: 'laptops' }]} />
-            <CustomSelect options={[{ label: 'Mobiles', value: 'mobiles' }, { label: 'Laptops', value: 'laptops' }]} />
-          </CardContent>
-        </Card>
-
-      </div>
-    </div>
-  )
+        <div className="flex flex-wrap gap-2 justify-between items-center rounded-md px-3 py-2 bg-secondary">
+          <ButtonWithIconLabel
+            icon={<Trash2 />}
+            label="Reset Product"
+            onClick={clearAll}
+            btnclassName="flex-1  rounded-md h-10 text-red-600"
+          />
+          <Button
+            type="submit"
+            className="flex-1 rounded-md h-10 bg-primary text-primary-foreground"
+          >
+            <Plus />
+            Add Product
+          </Button>
+        </div>
+      </form>
+    </Form>
+  );
 }

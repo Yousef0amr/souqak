@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/common/shared/card';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/common/shared/card";
 
 import {
   Package,
@@ -11,12 +11,12 @@ import {
   Folder,
   ShoppingCart,
   Eye,
-  Plus
-} from 'lucide-react';
-import { ImageWithFallback } from './ImageWithFallback';
-import { Button } from '@/common/buttons/button';
-import { Badge } from '@/common/shared/badge';
-import { Progress } from '@/common/shared/progress';
+  Plus,
+} from "lucide-react";
+import { ImageWithFallback } from "./ImageWithFallback";
+import { Button } from "@/common/buttons/button";
+import { Badge } from "@/common/shared/badge";
+import { Progress } from "@/common/shared/progress";
 
 interface ProductOverviewProps {
   onViewAll: (section: string) => void;
@@ -29,11 +29,12 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
   const fetchOverview = async () => {
     try {
       const response = await fetch(
-        'https://ubksuxbpoydwykfwqxdg.supabase.co/functions/v1/make-server-262b1683/dashboard/overview',
+        "https://ubksuxbpoydwykfwqxdg.supabase.co/functions/v1/make-server-262b1683/dashboard/overview",
         {
           headers: {
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVia3N1eGJwb3lkd3lrZndxeGRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjY5MzU0NTEsImV4cCI6MjA0MjUxMTQ1MX0.1OLVS_4CSkGsrCmN8HLLpYGIWnwEF1qR4vULCjMWBp4`
-          }
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVia3N1eGJwb3lkd3lrZndxeGRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjY5MzU0NTEsImV4cCI6MjA0MjUxMTQ1MX0.1OLVS_4CSkGsrCmN8HLLpYGIWnwEF1qR4vULCjMWBp4",
+          },
         }
       );
 
@@ -49,31 +50,31 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
           lowStockProducts: 3,
           recentProducts: [
             {
-              id: 'prod_1',
-              name: 'Premium Wireless Headphones',
+              id: "prod_1",
+              name: "Premium Wireless Headphones",
               price: 199.99,
-              images: ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400'],
-              status: 'published',
-              createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
+              images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"],
+              status: "published",
+              createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
             },
             {
-              id: 'prod_2',
-              name: 'Smartphone Case',
+              id: "prod_2",
+              name: "Smartphone Case",
               price: 29.99,
-              images: ['https://images.unsplash.com/photo-1601593346740-925612772716?w=400'],
-              status: 'published',
-              createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
-            }
+              images: ["https://images.unsplash.com/photo-1601593346740-925612772716?w=400"],
+              status: "published",
+              createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+            },
           ],
           topCategories: [
-            { id: 'cat_1', name: 'Electronics', productCount: 15 },
-            { id: 'cat_2', name: 'Fashion', productCount: 12 },
-            { id: 'cat_3', name: 'Home & Garden', productCount: 8 }
-          ]
+            { id: "cat_1", name: "Electronics", productCount: 15 },
+            { id: "cat_2", name: "Fashion", productCount: 12 },
+            { id: "cat_3", name: "Home & Garden", productCount: 8 },
+          ],
         });
       }
     } catch (error) {
-      console.error('Error fetching overview:', error);
+      console.error("Error fetching overview:", error);
     } finally {
       setLoading(false);
     }
@@ -116,9 +117,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{overview.totalProducts}</div>
-            <p className="text-xs text-muted-foreground">
-              {overview.activeProducts} active
-            </p>
+            <p className="text-xs text-muted-foreground">{overview.activeProducts} active</p>
           </CardContent>
         </Card>
 
@@ -129,9 +128,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{overview.totalCategories}</div>
-            <p className="text-xs text-muted-foreground">
-              Product categories
-            </p>
+            <p className="text-xs text-muted-foreground">Product categories</p>
           </CardContent>
         </Card>
 
@@ -142,9 +139,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-orange-600">{overview.lowStockProducts}</div>
-            <p className="text-xs text-muted-foreground">
-              Need attention
-            </p>
+            <p className="text-xs text-muted-foreground">Need attention</p>
           </CardContent>
         </Card>
 
@@ -155,9 +150,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">$89.99</div>
-            <p className="text-xs text-muted-foreground">
-              Per product
-            </p>
+            <p className="text-xs text-muted-foreground">Per product</p>
           </CardContent>
         </Card>
       </div>
@@ -167,7 +160,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Recent Products</CardTitle>
-            <Button variant="outline" size="sm" onClick={() => onViewAll('products')}>
+            <Button variant="outline" size="sm" onClick={() => onViewAll("products")}>
               View All
             </Button>
           </CardHeader>
@@ -210,7 +203,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
                     variant="outline"
                     size="sm"
                     className="mt-3"
-                    onClick={() => onViewAll('products')}
+                    onClick={() => onViewAll("products")}
                   >
                     <Plus className="h-4 w-4 mr-2" />
                     Add Product
@@ -225,23 +218,28 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Top Categories</CardTitle>
-            <Button variant="outline" size="sm" onClick={() => onViewAll('categories')}>
+            <Button variant="outline" size="sm" onClick={() => onViewAll("categories")}>
               Manage
             </Button>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {overview.topCategories?.map((category: any, index: number) => {
-                const maxProducts = Math.max(...overview.topCategories.map((c: any) => c.productCount));
+                const maxProducts = Math.max(
+                  ...overview.topCategories.map((c: any) => c.productCount)
+                );
                 const percentage = (category.productCount / maxProducts) * 100;
 
                 return (
                   <div key={category.id} className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-primary" style={{
-                          backgroundColor: `hsl(${index * 60}, 70%, 50%)`
-                        }} />
+                        <div
+                          className="w-2 h-2 rounded-full bg-primary"
+                          style={{
+                            backgroundColor: `hsl(${index * 60}, 70%, 50%)`,
+                          }}
+                        />
                         <span className="font-medium">{category.name}</span>
                       </div>
                       <span className="text-sm text-muted-foreground">
@@ -260,7 +258,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
                     variant="outline"
                     size="sm"
                     className="mt-3"
-                    onClick={() => onViewAll('categories')}
+                    onClick={() => onViewAll("categories")}
                   >
                     <Plus className="h-4 w-4 mr-2" />
                     Add Category
@@ -282,7 +280,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
             <Button
               variant="outline"
               className="flex items-center justify-center gap-2 h-24"
-              onClick={() => onViewAll('products')}
+              onClick={() => onViewAll("products")}
             >
               <Package className="h-6 w-6" />
               <div>
@@ -294,7 +292,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
             <Button
               variant="outline"
               className="flex items-center justify-center gap-2 h-24"
-              onClick={() => onViewAll('categories')}
+              onClick={() => onViewAll("categories")}
             >
               <Folder className="h-6 w-6" />
               <div>
@@ -306,7 +304,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
             <Button
               variant="outline"
               className="flex items-center justify-center gap-2 h-24"
-              onClick={() => onViewAll('orders')}
+              onClick={() => onViewAll("orders")}
             >
               <ShoppingCart className="h-6 w-6" />
               <div>

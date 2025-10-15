@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
-
-const initialState: Omit<ModalState, 'openModal' | 'closeModal'> = {
+const initialState: Omit<ModalState, "openModal" | "closeModal"> = {
   isOpen: false,
   componentName: null,
   modalTitle: null,

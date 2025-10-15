@@ -43,7 +43,7 @@ export function DatePicker({
             "w-[280px] px-3 py-2 h-10 justify-start text-left font-normal overflow-hidden !bg-background",
             !date && "text-muted-foreground",
             buttonClassName,
-            error && "border-red-500",
+            error && "border-red-500"
           )}
           disabled={disabled}
         >

@@ -30,7 +30,7 @@ export function DataListPagination({
       pages.push(
         <PaginationItem key={1}>
           <PaginationLink onClick={() => onPageChange(1)}>1</PaginationLink>
-        </PaginationItem>,
+        </PaginationItem>
       );
       if (start > 2) {
         pages.push(<PaginationEllipsis key="ellipsis-start" />);
@@ -43,7 +43,7 @@ export function DataListPagination({
           <PaginationLink isActive={i === currentPage} onClick={() => onPageChange(i)}>
             {i}
           </PaginationLink>
-        </PaginationItem>,
+        </PaginationItem>
       );
     }
 
@@ -54,7 +54,7 @@ export function DataListPagination({
       pages.push(
         <PaginationItem key={totalPages}>
           <PaginationLink onClick={() => onPageChange(totalPages)}>{totalPages}</PaginationLink>
-        </PaginationItem>,
+        </PaginationItem>
       );
     }
 

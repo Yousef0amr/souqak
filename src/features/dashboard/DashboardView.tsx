@@ -1,36 +1,35 @@
 "use client";
 
-import React from 'react';
-import { KPICard } from './KPICard';
-import { RevenueChart } from './RevenueChart';
-import { UserGrowthChart } from './UserGrowthChart';
-import { ProductOverview } from './ProductOverview';
+import React from "react";
+import { KPICard } from "./KPICard";
+import { RevenueChart } from "./RevenueChart";
+import { UserGrowthChart } from "./UserGrowthChart";
+import { ProductOverview } from "./ProductOverview";
 
-import { RefreshCw, DollarSign, Users, ShoppingCart, TrendingUp } from 'lucide-react';
-import { Button } from '@/common/buttons/button';
-
+import { RefreshCw, DollarSign, Users, ShoppingCart, TrendingUp } from "lucide-react";
+import { Button } from "@/common/buttons/button";
 
 const dummyData = {
   kpis: {
-    revenue: { value: 45230, change: 12, trend: 'up' as const },
-    users: { value: 1280, change: 5, trend: 'up' as const },
-    orders: { value: 320, change: -2, trend: 'down' as const },
-    growth: { value: 7.8, change: 1.2, trend: 'up' as const },
+    revenue: { value: 45230, change: 12, trend: "up" as const },
+    users: { value: 1280, change: 5, trend: "up" as const },
+    orders: { value: 320, change: -2, trend: "down" as const },
+    growth: { value: 7.8, change: 1.2, trend: "up" as const },
   },
   chartData: {
     revenue: [
-      { month: 'Jan', revenue: 12000 },
-      { month: 'Feb', revenue: 15000 },
-      { month: 'Mar', revenue: 18000 },
-      { month: 'Apr', revenue: 22000 },
-      { month: 'May', revenue: 25000 },
+      { month: "Jan", revenue: 12000 },
+      { month: "Feb", revenue: 15000 },
+      { month: "Mar", revenue: 18000 },
+      { month: "Apr", revenue: 22000 },
+      { month: "May", revenue: 25000 },
     ],
     users: [
-      { month: 'Jan', users: 200 },
-      { month: 'Feb', users: 400 },
-      { month: 'Mar', users: 600 },
-      { month: 'Apr', users: 900 },
-      { month: 'May', users: 1280 },
+      { month: "Jan", users: 200 },
+      { month: "Feb", users: 400 },
+      { month: "Mar", users: 600 },
+      { month: "Apr", users: 900 },
+      { month: "May", users: 1280 },
     ],
   },
 };
@@ -48,7 +47,7 @@ export const DashboardView = () => {
             Welcome back! Here's what's happening with your business today.
           </p>
         </div>
-        <Button variant="outline" onClick={() => { }}>
+        <Button variant="outline" onClick={() => {}}>
           <RefreshCw className="h-4 w-4 mr-2" />
           Refresh
         </Button>
@@ -95,7 +94,7 @@ export const DashboardView = () => {
       </div>
 
       {/* Product Overview */}
-      <ProductOverview onViewAll={() => { }} />
+      <ProductOverview onViewAll={() => {}} />
 
       {/* Additional Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

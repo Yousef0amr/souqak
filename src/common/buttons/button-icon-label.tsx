@@ -19,7 +19,7 @@ const ButtonWithIconLabel = ({
       variant="ghost"
       className={cn(
         "rounded-full border bg-background hover:bg-accent dark:bg-background dark:hover:bg-background h-8 w-8",
-        btnclassName,
+        btnclassName
       )}
       size="icon"
       onClick={onClick}
