@@ -58,15 +58,13 @@ export function DynamicModalContent() {
           className={cn(
             "w-[400px] sm:max-w-[600px] overflow-hidden",
             modalContentClassName,
-            withCloseBtn ? "" : "[&>button]:hidden",
+            withCloseBtn ? "" : "[&>button]:hidden"
           )}
         >
           {(modalTitle || modalDescription) && (
             <SheetHeader className={cn(hideModalTitle && "hidden")}>
               {modalTitle && <SheetTitle>{modalTitle}</SheetTitle>}
-              {modalDescription && (
-                <SheetDescription>{modalDescription}</SheetDescription>
-              )}
+              {modalDescription && <SheetDescription>{modalDescription}</SheetDescription>}
             </SheetHeader>
           )}
 
@@ -76,9 +74,7 @@ export function DynamicModalContent() {
             </Suspense>
           )}
 
-          {modalWithFooter && modalFooterContent && (
-            <SheetFooter>{modalFooterContent}</SheetFooter>
-          )}
+          {modalWithFooter && modalFooterContent && <SheetFooter>{modalFooterContent}</SheetFooter>}
         </SheetContent>
       </Sheet>
     );
@@ -95,7 +91,7 @@ export function DynamicModalContent() {
         className={cn(
           " overflow-hidden",
           modalContentClassName,
-          withCloseBtn ? "" : "[&>button]:hidden",
+          withCloseBtn ? "" : "[&>button]:hidden"
         )}
       >
         {(modalTitle || modalDescription) && (
@@ -103,9 +99,7 @@ export function DynamicModalContent() {
             {modalTitle && <DialogTitle>{modalTitle}</DialogTitle>}
           </DialogHeader>
         )}
-        {modalDescription && (
-          <DialogDescription>{modalDescription}</DialogDescription>
-        )}
+        {modalDescription && <DialogDescription>{modalDescription}</DialogDescription>}
 
         {ComponentToRender && (
           <Suspense fallback={<div>Loading...</div>}>
@@ -113,9 +107,7 @@ export function DynamicModalContent() {
           </Suspense>
         )}
 
-        {modalWithFooter && modalFooterContent && (
-          <DialogFooter>{modalFooterContent}</DialogFooter>
-        )}
+        {modalWithFooter && modalFooterContent && <DialogFooter>{modalFooterContent}</DialogFooter>}
       </DialogContent>
     </Dialog>
   );

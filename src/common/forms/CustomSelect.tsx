@@ -29,7 +29,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     const isSame =
       internalOptions.length === options.length &&
       internalOptions.every(
-        (opt, idx) => opt.value === options[idx].value && opt.label === options[idx].label,
+        (opt, idx) => opt.value === options[idx].value && opt.label === options[idx].label
       );
 
     if (!isSame) {
@@ -81,7 +81,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   };
 
   const filteredOptions = internalOptions.filter((opt) =>
-    opt.label.toLowerCase().includes(inputValue.toLowerCase()),
+    opt.label.toLowerCase().includes(inputValue.toLowerCase())
   );
 
   useEffect(() => {
@@ -105,7 +105,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         className={cn(
           "w-full border rounded-md py-2 px-3 min-h-[40px] bg-background  flex items-center flex-nowrap gap-1 cursor-text",
           error ? "border-destructive" : "border-input",
-          styleSettings?.selectBoxClassName,
+          styleSettings?.selectBoxClassName
         )}
         onClick={() => setShowOptions(true)}
       >
@@ -118,7 +118,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
                 disabled
                   ? "bg-secondary text-secondary-foreground cursor-no-drop"
                   : "bg-black text-white",
-                styleSettings?.tagValueClassName,
+                styleSettings?.tagValueClassName
               )}
             >
               {v.label}
@@ -146,7 +146,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           className={cn(
             "w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground text-muted-foreground",
             disabled ? "cursor-no-drop" : "",
-            styleSettings?.searchClassName,
+            styleSettings?.searchClassName
           )}
           placeholder={value ? "" : placeholder}
           value={inputValue}
@@ -188,7 +188,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
             exit={{ opacity: 0, y: -10 }}
             className={cn(
               "absolute z-10 w-full bg-background border mt-1 rounded-md shadow-md max-h-60 overflow-y-auto text-sm",
-              dropdownPosition === "bottom" ? "mt-1 top-full" : "mb-1 bottom-full",
+              dropdownPosition === "bottom" ? "mt-1 top-full" : "mb-1 bottom-full"
             )}
           >
             {filteredOptions.length === 0 && <li className="p-2 text-gray-400">No options</li>}

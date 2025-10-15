@@ -16,7 +16,7 @@ function Input({ className, error, type, ...props }: InputProps) {
         error
           ? "border-destructive focus-visible:border-destructive focus-visible:ring-destructive/20"
           : "border-input focus-visible:border-ring focus-visible:ring-ring/50",
-        className,
+        className
       )}
       {...props}
     />

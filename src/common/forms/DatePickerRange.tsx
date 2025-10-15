@@ -44,7 +44,7 @@ export default function DateRangePicker({
               "w-[300px] px-3 py-2 justify-start text-left font-normal h-full !bg-background",
               !date && "text-muted-foreground",
               error && "border-destructive",
-              btnClassName,
+              btnClassName
             )}
           >
             <div className="flex items-center justify-between gap-2 w-full">

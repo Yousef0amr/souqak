@@ -1,6 +1,16 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/common/shared/card';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import React from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/common/shared/card";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Area,
+  AreaChart,
+} from "recharts";
 
 interface RevenueChartProps {
   data: Array<{ month: string; value: number }>;
@@ -30,9 +40,7 @@ export const RevenueChart: React.FC<RevenueChartProps> = ({ data, className }) =
     <Card className={className}>
       <CardHeader>
         <CardTitle>Revenue Trend</CardTitle>
-        <CardDescription>
-          Monthly revenue over the last 6 months
-        </CardDescription>
+        <CardDescription>Monthly revenue over the last 6 months</CardDescription>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>

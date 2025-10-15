@@ -1,10 +1,8 @@
-import { DashboardView } from '@/features/dashboard/DashboardView'
-import React from 'react'
+import { DashboardView } from "@/features/dashboard/DashboardView";
+import React from "react";
 
 const page = () => {
-    return (
-        <DashboardView />
-    )
-}
+  return <DashboardView />;
+};
 
-export default page
+export default page;

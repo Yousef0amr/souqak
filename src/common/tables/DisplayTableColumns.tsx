@@ -34,7 +34,7 @@ const DisplayTableColumns = <TData,>({
     <div className="flex items-center">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" >
+          <Button variant="outline">
             <Columns3 className="font-normal" size={12} />
             Columns
           </Button>

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/common/shared/card';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/common/shared/card";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 interface UserGrowthChartProps {
   data: Array<{ month: string; value: number }>;
@@ -26,9 +26,7 @@ export const UserGrowthChart: React.FC<UserGrowthChartProps> = ({ data, classNam
     <Card className={className}>
       <CardHeader>
         <CardTitle>User Growth</CardTitle>
-        <CardDescription>
-          Total users by month
-        </CardDescription>
+        <CardDescription>Total users by month</CardDescription>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
@@ -48,11 +46,7 @@ export const UserGrowthChart: React.FC<UserGrowthChartProps> = ({ data, classNam
               className="text-muted-foreground"
             />
             <Tooltip content={<CustomTooltip />} />
-            <Bar
-              dataKey="value"
-              fill="hsl(var(--primary))"
-              radius={[4, 4, 0, 0]}
-            />
+            <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>

@@ -1,10 +1,7 @@
-import ProductsPage from "@/features/products/pages/Products"
-
+import ProductsPage from "@/features/products/pages/Products";
 
 const page = () => {
-    return (
-        <ProductsPage />
-    )
-}
+  return <ProductsPage />;
+};
 
-export default page
+export default page;
