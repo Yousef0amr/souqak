@@ -60,10 +60,10 @@ export function DataTable<TData>({
 
   return (
     <div className="w-full">
-      <div className={cn("rounded-[8px] border", wrapperClassName)}>
+      <div className={cn("rounded-md ", wrapperClassName)}>
         <ScrollArea className={cn("", scrollAreaClassName)}>
           <Table>
-            <TableHeader className={cn("", headerClassName)}>
+            <TableHeader className={cn("bg-background", headerClassName)}>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (

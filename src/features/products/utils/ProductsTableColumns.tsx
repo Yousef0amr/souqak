@@ -19,25 +19,16 @@ export const ProductsTableColumns: ColumnDef<Product>[] = [
             <TableColumnHeader column={column} columnName="Image" />
         ),
         cell: ({ row }) => (
-            <div className="flex items-center justify-center">
-                {row.original.image ? (
-                    <img
-                        src={row.original.image}
-                        alt={row.original.name}
-                        className="h-12 w-12 rounded-md object-cover border"
-                        onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            target.nextElementSibling?.classList.remove('hidden');
-                        }}
-                    />
+            <div className="">
+                {row.original.department ? (
+                    <div></div>
                 ) : (
                     <div className="h-12 w-12 rounded-md bg-muted flex items-center justify-center">
                         <ImageIcon className="h-6 w-6 text-muted-foreground" />
                     </div>
                 )}
-                {!row.original.image && (
-                    <div className="h-12 w-12 rounded-md bg-muted flex items-center justify-center hidden">
+                {!row.original.department && (
+                    <div className="h-12 w-12 rounded-md bg-muted  items-center justify-center ">
                         <ImageIcon className="h-6 w-6 text-muted-foreground" />
                     </div>
                 )}
@@ -67,24 +58,12 @@ export const ProductsTableColumns: ColumnDef<Product>[] = [
         cell: ({ row }) => <span className="text-muted-foreground whitespace-nowrap">{row.original.sku}</span>,
     },
     {
-        accessorKey: "price",
+        accessorKey: "brand",
         size: 140,
         header: ({ column }) => (
             <TableColumnHeader column={column} columnName="Price" />
         ),
-        cell: ({ row }) => <span className="tabular-nums whitespace-nowrap">${row.original.price.toFixed(2)}</span>,
-    },
-    {
-        accessorKey: "status",
-        size: 140,
-        header: ({ column }) => (
-            <TableColumnHeader column={column} columnName="Status" />
-        ),
-        cell: ({ row }) => (
-            <Badge variant={row.original.status === "active" ? "default" : row.original.status === "draft" ? "outline" : "secondary"}>
-                {row.original.status}
-            </Badge>
-        ),
+        cell: ({ row }) => <span className="tabular-nums whitespace-nowrap">${row.original.brand}</span>,
     },
     {
         id: "actions",

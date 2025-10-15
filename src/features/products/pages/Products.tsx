@@ -27,12 +27,9 @@ export default function ProductsPage() {
             <div className="flex items-center gap-2">
                 <Button className="w-full sm:w-auto" onClick={() => openModal({
                     componentName: "add-product",
-                    modalTitle: "Add Product",
-                    withCloseBtn: true,
-                    enableOutsideClick: false,
                     mode: "dialog",
-                    modalContentClassName: "p-4 sm:max-w-[600px] lg:max-w-[900px] xl:max-w-[1200px] 2xl:max-w-[1400px]",
-
+                    modalContentClassName: "h-fit  sm:max-w-[1200px] lg:max-w-[900px] xl:max-w-[1200px] 2xl:max-w-[calc(100%-2rem)]",
+                    withCloseBtn: true,
 
                 })} >
                     <Plus className="size-4 mr-2" />Add product

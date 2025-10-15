@@ -5,14 +5,29 @@ declare global {
 
 
 
-    type Product = {
-        id: string;
-        name: string;
-        sku: string;
-        price: number;
-        status: "active" | "draft" | "archived";
-        image: string;
-    };
+    interface Variant {
+        id: string
+        variant_sku: string
+        color: string
+        costPrice: number
+        retailPrice: number
+        size: string
+        barcode: string
+        images?: File[]
+    }
+
+    interface Product {
+        id: string
+        name: string
+        department: string
+        sku: string
+        brand: string
+        category: string
+        subcategory: string
+        description: string
+        variant: Variant
+    }
+
 
     interface ProductsViewManagementProps {
         children?: (props: {
@@ -21,6 +36,7 @@ declare global {
             view: "table" | "grid";
         }) => ReactNode;
         showFilter?: boolean;
+        hiddenItems?: ("filters" | "search" | "columns" | "viewButtons" | "export")[];
     }
 
 }
