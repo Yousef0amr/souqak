@@ -4,9 +4,6 @@ import PaginationWithPerPage from "@/shared/components/PaginationWithPerPage";
 import ProductsViewManagement from "../show-all-products/ProductsViewManagement";
 import { ProductGrid } from "../show-all-products/ProductGrid";
 
-
-
-
 export function ProductTable({
   hiddenItems = [],
   data,
@@ -19,7 +16,7 @@ export function ProductTable({
       <ProductsViewManagement showFilter={true} hiddenItems={hiddenItems}>
         {({ columnVisibility, setColumnVisibility, view }) =>
           view === "grid" ? (
-            <ProductGrid data={data} onProductClick={() => { }} />
+            <ProductGrid data={data} onProductClick={() => {}} />
           ) : (
             <DataTable
               data={data || []}

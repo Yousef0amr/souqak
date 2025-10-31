@@ -33,30 +33,7 @@ export default function ProductForm() {
   const { addProduct, products } = useAddProductStore();
 
   const onSubmit = (values: any) => {
-    const productData = {
-      brand: values.brand.value as string,
-      category: values.category.value as string,
-      department: values.department.value as string,
-      subcategory: values.subcategory.value as string,
-      name: values.name as string,
-      sku: values.sku as string,
-      description: values.description as string,
-      variant: {
-        id: values.id as string,
-        variant_sku: values.variant_sku as string,
-        color: values.color as string,
-        size: values.size as string,
-        barcode: values.barcode as string,
-        costPrice: values.costPrice as number,
-        retailPrice: values.retailPrice as number,
-      },
-    };
-
     console.log("Form Submitted", { ...values });
-
-    addProduct(productData);
-
-    reset();
   };
 
   const clearAll = () => reset();

@@ -8,7 +8,6 @@ import { ProductTable } from "../components/shared/ProductTable";
 import { Card, CardContent, CardHeader, CardTitle } from "@/common/shared/card";
 import { useModalStore } from "@/shared/stores/DynamicModalStore";
 
-
 export const mockProducts: Product[] = [
   {
     id: "1",
@@ -178,8 +177,7 @@ export const mockProducts: Product[] = [
     brand: "JBL",
     category: "Speakers",
     subcategory: "Portable",
-    description:
-      "Compact waterproof Bluetooth speaker with punchy sound and 12-hour playtime.",
+    description: "Compact waterproof Bluetooth speaker with punchy sound and 12-hour playtime.",
     variant: {
       id: "v9",
       variant_sku: "JBL-F6-BLK",
