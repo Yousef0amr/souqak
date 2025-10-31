@@ -5,6 +5,7 @@ import { Button } from "@/common/buttons/button";
 import { Input } from "@/common/forms/input";
 import { FormFieldWrapper } from "@/common/forms/fields/FormFieldWrapper";
 import ButtonWithIconLabel from "@/common/buttons/button-icon-label";
+import { SizeChartSelector } from "../shared/SizeChartSelector";
 
 export default function VariantInfoSection({ control }: { control: any }) {
   return (
@@ -40,9 +41,7 @@ export default function VariantInfoSection({ control }: { control: any }) {
 
       {/* Other Info */}
       <div className="flex flex-col sm:flex-row gap-2">
-        <FormFieldWrapper name="size" label="Size" control={control}>
-          {(field) => <Input placeholder="Size" {...field} />}
-        </FormFieldWrapper>
+        <SizeChartSelector nameSystem="sizeSystem" nameSize="size" />
         <FormFieldWrapper name="barcode" label="Barcode" control={control}>
           {(field) => <Input placeholder="Barcode" {...field} />}
         </FormFieldWrapper>
