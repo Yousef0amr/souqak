@@ -1,12 +1,32 @@
 import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/config/shadcnUtils";
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
+const cardVariants = cva(
+  "rounded-xl border bg-card text-card-foreground transition-all duration-300",
+  {
+    variants: {
+      variant: {
+        default:  "border-border/60 shadow-sm",
+        elevated: "border-border/40 shadow-md hover:shadow-xl hover:-translate-y-1 cursor-default",
+        glass:    "backdrop-blur-md bg-white/10 border-white/20 shadow-lg",
+        outline:  "border-2 border-border bg-transparent shadow-none",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+type CardProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof cardVariants>;
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("rounded-lg border bg-card text-card-foreground shadow-sm", className)}
+      className={cn(cardVariants({ variant }), className)}
       {...props}
     />
   )

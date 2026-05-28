@@ -10,7 +10,7 @@ import {
 } from "@/common/forms/form";
 import { cn } from "@/config/shadcnUtils";
 import { Control, FieldValues, ControllerRenderProps, Path } from "react-hook-form";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 interface FormFieldWrapperProps<TFieldValues extends FieldValues = FieldValues> {
   control: Control<any>;
@@ -21,6 +21,7 @@ interface FormFieldWrapperProps<TFieldValues extends FieldValues = FieldValues> 
   note?: string;
   optional?: boolean;
   children: (field: ControllerRenderProps<TFieldValues, Path<TFieldValues>>) => ReactNode;
+  /** @deprecated - errors now always show */
   showErrorOnFocus?: boolean;
 }
 
@@ -33,42 +34,36 @@ export const FormFieldWrapper = ({
   note,
   optional,
   children,
-  showErrorOnFocus = true,
 }: FormFieldWrapperProps) => {
-  const [isFocused, setIsFocused] = useState(false);
-
   return (
     <FormField
       control={control}
       name={name}
-      render={({ field, fieldState }) => (
+      render={({ field }) => (
         <FormItem className={cn("w-full", className)}>
-          {typeof label === "string" ? (
-            <FormLabel className={"text-sm font-medium text-foreground "}>
-              <span className="flex items-center ">
+          {label !== undefined && (
+            typeof label === "string" ? (
+              <FormLabel>
                 {label}
-                {optional && <span className="ml-1 text-sm text-foreground">(Optional)</span>}
-              </span>
-            </FormLabel>
-          ) : (
-            label?.()
+                {optional && (
+                  <span className="ml-1 text-[11px] font-normal text-muted-foreground/70 tracking-wide">
+                    (optional)
+                  </span>
+                )}
+              </FormLabel>
+            ) : (
+              label()
+            )
           )}
 
-          <FormControl
-            className={cn("w-full", childrenClassName)}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-          >
+          <FormControl className={cn("w-full", childrenClassName)}>
             {children(field)}
           </FormControl>
 
-          {note && (
-            <FormDescription className="mt-1 text-neutral-400 text-xs">{note}</FormDescription>
-          )}
+          {note && <FormDescription>{note}</FormDescription>}
 
-          {fieldState.error && ((showErrorOnFocus && isFocused) || !showErrorOnFocus) && (
-            <FormMessage className="text-red-500 text-[0.75rem] mx-1 mt-1" />
-          )}
+          {/* Always show errors — no focus gating */}
+          <FormMessage />
         </FormItem>
       )}
     />

@@ -1,1 +1,164 @@
-{}
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search...",
+    "loading": "Loading...",
+    "noResults": "No results found",
+    "actions": "Actions",
+    "confirm": "Confirm",
+    "refresh": "Refresh",
+    "add": "Add",
+    "status": "Status",
+    "success": "Success",
+    "error": "Error"
+  },
+  "sidebar": {
+    "title": "Souqak POS",
+    "main": "Main",
+    "sales": "Sales",
+    "operations": "Operations",
+    "system": "System",
+    "dashboard": "Dashboard",
+    "analytics": "Analytics",
+    "products": "Products",
+    "orders": "Orders",
+    "customers": "Customers",
+    "payments": "Payments",
+    "shipping": "Shipping",
+    "marketing": "Marketing",
+    "settings": "Settings",
+    "security": "Security",
+    "integrations": "Integrations",
+    "inventory": "Inventory",
+    "suppliers": "Suppliers",
+    "purchaseOrders": "Purchase Orders",
+    "users": "Users",
+    "receipts": "Receipts",
+    "expenseCategories": "Expense Categories",
+    "unitConversions": "Unit Conversions"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Welcome back! Here's what's happening with your business today.",
+    "revenue": "Total Revenue",
+    "users": "Total Users",
+    "orders": "Total Orders",
+    "growth": "Growth Rate",
+    "conversion": "Conversion Rate",
+    "orderValue": "Average Order Value",
+    "retention": "Customer Retention",
+    "lowStock": "Low Stock Alerts",
+    "recentSales": "Recent Sales Activity"
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "Manage your product catalog, filters, and actions",
+    "create": "Create Product",
+    "edit": "Edit Product",
+    "delete": "Delete Product",
+    "fields": {
+      "name": "Product Name",
+      "sku": "SKU",
+      "price": "Price",
+      "stock": "Stock",
+      "brand": "Brand",
+      "category": "Category"
+    }
+  },
+  "orders": {
+    "title": "Orders",
+    "subtitle": "Manage and process POS sales orders",
+    "create": "Create Order",
+    "orderId": "Order ID",
+    "customer": "Customer",
+    "total": "Total Amount",
+    "date": "Date",
+    "status": "Status",
+    "items": "Items Count",
+    "completed": "Completed",
+    "pending": "Pending",
+    "cancelled": "Cancelled"
+  },
+  "customers": {
+    "title": "Customers",
+    "subtitle": "Manage customer directory and credit ratings",
+    "create": "Add Customer",
+    "name": "Customer Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "credit": "Credit Score / Limit",
+    "outstanding": "Outstanding Debt"
+  },
+  "payments": {
+    "title": "Payments & Invoices",
+    "subtitle": "Track invoicing history and billing reports",
+    "invoiceNo": "Invoice No.",
+    "amount": "Amount",
+    "method": "Payment Method",
+    "cash": "Cash",
+    "card": "Card",
+    "payouts": "Payout Logs",
+    "expenses": "Business Expenses"
+  },
+  "inventory": {
+    "title": "Inventory Management",
+    "subtitle": "Track stock levels, adjust quantities, and manage inventory"
+  },
+  "suppliers": {
+    "title": "Suppliers",
+    "subtitle": "Manage inventory suppliers, contact persons, and purchase tracking"
+  },
+  "purchaseInvoices": {
+    "title": "Purchase Invoices",
+    "subtitle": "Manage supplier invoices, purchase orders, and receive catalog inventory"
+  },
+  "analytics": {
+    "title": "Analytics & Reports",
+    "subtitle": "Detailed sales projections, revenue trends, and performance metrics"
+  },
+  "users": {
+    "title": "Users & Permissions",
+    "subtitle": "Manage system users, roles, and access levels"
+  },
+  "receipts": {
+    "title": "Receipts",
+    "subtitle": "Look up and manage customer receipts"
+  },
+  "expenseCategories": {
+    "title": "Expense Categories",
+    "subtitle": "Categorize and organize business expenses"
+  },
+  "unitConversions": {
+    "title": "Unit Conversions",
+    "subtitle": "Manage unit conversion factors for inventory and product measurements"
+  },
+  "marketing": {
+    "title": "Marketing Campaigns",
+    "subtitle": "Create store coupons, track active discount codes, and optimize POS checkout conversions"
+  },
+  "shipping": {
+    "title": "Shipping & Fulfilment",
+    "subtitle": "Manage shipping couriers, print labels, and track active parcel deliveries"
+  },
+  "security": {
+    "title": "Security",
+    "subtitle": "Audit logs and security settings"
+  },
+  "integrations": {
+    "title": "Integrations",
+    "subtitle": "Connect third-party tools and services"
+  },
+  "settings": {
+    "title": "System Settings",
+    "subtitle": "Manage categories, store tax systems, and user profiles",
+    "general": "General Store Settings",
+    "categories": "Product Categories",
+    "units": "Measurement Units",
+    "taxes": "VAT & Taxes",
+    "users": "System User Accounts"
+  }
+}

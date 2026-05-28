@@ -11,6 +11,7 @@ import {
   type FieldPath,
   type FieldValues,
 } from "react-hook-form";
+import { AlertCircle } from "lucide-react";
 
 import { cn } from "@/config/shadcnUtils";
 import { Label } from "@/common/shared/label";
@@ -71,10 +72,9 @@ const FormItemContext = React.createContext<FormItemContextValue>({} as FormItem
 const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
     const id = React.useId();
-
     return (
       <FormItemContext.Provider value={{ id }}>
-        <div ref={ref} className={cn("space-y-2", className)} {...props} />
+        <div ref={ref} className={cn("space-y-1.5 group", className)} {...props} />
       </FormItemContext.Provider>
     );
   }
@@ -86,7 +86,6 @@ const FormLabel = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField();
-
   return (
     <Label
       ref={ref}
@@ -103,7 +102,6 @@ const FormControl = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof Slot>
 >(({ ...props }, ref) => {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
-
   return (
     <Slot
       ref={ref}
@@ -121,12 +119,11 @@ const FormDescription = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => {
   const { formDescriptionId } = useFormField();
-
   return (
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-sm text-muted-foreground", className)}
+      className={cn("text-xs text-muted-foreground/80 mt-0.5", className)}
       {...props}
     />
   );
@@ -140,17 +137,19 @@ const FormMessage = React.forwardRef<
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message ?? "") : children;
 
-  if (!body) {
-    return null;
-  }
+  if (!body) return null;
 
   return (
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn(
+        "flex items-center gap-1.5 text-xs font-medium text-destructive mt-0.5",
+        className
+      )}
       {...props}
     >
+      <AlertCircle className="h-3.5 w-3.5 shrink-0" />
       {body}
     </p>
   );
