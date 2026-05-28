@@ -3,6 +3,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   // to ignore ts & eslint errors in build -> to test in local -> don't active them 👍
+
   // typescript: {
   //   ignoreBuildErrors: true,
   // },

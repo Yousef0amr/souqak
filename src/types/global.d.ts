@@ -2,6 +2,37 @@ import type { Column, ColumnDef, VisibilityState } from "@tanstack/react-table";
 import type { ReactNode } from "react";
 
 declare global {
+  // ─── Auth / Session ────────────────────────────────────────────────────────
+
+  interface SessionData {
+    accessToken?: string;
+    refreshToken?: string;
+    userId?: string;
+  }
+
+  interface ApiSuccessResponseDto<TData> {
+    success: true;
+    result: { data: TData };
+    errors?: never;
+  }
+
+  interface ApiFailedResponseDto<TErrors = Record<string, string[]>> {
+    success: false;
+    status: number;
+    errors?: TErrors;
+    message?: string;
+  }
+
+  type ApiResult<TData, TErrors = Record<string, string[]>> =
+    | ApiSuccessResponseDto<TData>
+    | ApiFailedResponseDto<TErrors>;
+
+  interface UseSelectOptionsConfig<T> {
+    labelKey: keyof T;
+    valueKey: keyof T;
+  }
+
+  // ─── Tables ────────────────────────────────────────────────────────────────
   interface DataTableProps<TData> {
     data: TData[];
     columns: ColumnDef<TData>[];
@@ -95,6 +126,7 @@ declare global {
     enableOutsideClick: boolean;
     mode?: "dialog" | "sheet";
     sheetSide?: "right" | "left" | "top" | "bottom";
+    extraProps?: Record<string, any>;
     openModal: (settings: Partial<Omit<ModalState, "openModal" | "closeModal">>) => void;
     closeModal: () => void;
   };
