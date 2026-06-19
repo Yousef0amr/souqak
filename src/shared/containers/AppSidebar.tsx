@@ -20,6 +20,10 @@ import {
   UserCog,
   Tags,
   LogOut,
+  Layers,
+  Award,
+  Ruler,
+  Percent,
 } from "lucide-react";
 import { Link, usePathname } from "@/config/i18n/navigation";
 import logo from "@/assets/souqak.png";
@@ -69,10 +73,18 @@ const operationsItems = [
   { to: "/dashboard/marketing",         label: "Marketing",       icon: Megaphone },
 ];
 
+const setupItems = [
+  { to: "/dashboard/stores",             label: "Stores",              icon: Building2 },
+  { to: "/dashboard/categories",         label: "Categories",          icon: Layers },
+  { to: "/dashboard/brands",             label: "Brands",              icon: Award },
+  { to: "/dashboard/units",              label: "Measurement Units",   icon: Ruler },
+  { to: "/dashboard/unit-conversions",   label: "Unit Conversions",    icon: ArrowRightLeft },
+  { to: "/dashboard/expense-categories", label: "Expense Categories",  icon: Tags },
+  { to: "/dashboard/taxes",              label: "VAT & Taxes",         icon: Percent },
+];
+
 const systemItems = [
   { to: "/dashboard/users",              label: "Users",               icon: UserCog },
-  { to: "/dashboard/expense-categories", label: "Expense Categories",  icon: Tags },
-  { to: "/dashboard/unit-conversions",   label: "Unit Conversions",    icon: ArrowRightLeft },
   { to: "/dashboard/settings",           label: "Settings",            icon: Settings },
   { to: "/dashboard/security",           label: "Security",            icon: ShieldCheck },
   { to: "/dashboard/integrations",       label: "Integrations",        icon: Plug },
@@ -83,6 +95,7 @@ const NAV_GROUPS = [
   { label: "Overview",    items: mainItems },
   { label: "Sales",       items: salesItems },
   { label: "Operations",  items: operationsItems },
+  { label: "Setup",       items: setupItems },
   { label: "System",      items: systemItems },
 ] as const;
 

@@ -1,8 +1,9 @@
-﻿"use client";
+"use client";
 
 import { useForm } from "react-hook-form";
 import { Form } from "@/common/forms/form";
 import ProductInfoSection from "./ProductInfoSection";
+import ProductImagesSection from "./ProductImagesSection";
 import { Button } from "@/common/buttons/button";
 import { Loader2, Save } from "lucide-react";
 import { useCreateProduct } from "../../hooks/useProducts";
@@ -29,7 +30,7 @@ export default function ProductForm() {
       stockQty: 0,
       reorderLevel: 10,
       active: true,
-      imageUrl: "",
+      images: [],
     },
   });
 
@@ -46,6 +47,7 @@ export default function ProductForm() {
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <ProductInfoSection form={form} />
+        <ProductImagesSection form={form} />
 
         <div className="flex justify-end gap-2 pt-2 border-t">
           <Button type="button" variant="outline" onClick={() => closeModal()}>

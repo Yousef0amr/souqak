@@ -1,10 +1,11 @@
-﻿import { Button } from "@/common/buttons/button";
+import { Button } from "@/common/buttons/button";
 import { Badge } from "@/common/shared/badge";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, Pencil, Trash, Image as ImageIcon } from "lucide-react";
 import TableColumnHeader from "@/common/tables/TableColumnHeader";
 import { useDeleteProduct } from "../hooks/useProducts";
 import { useModalStore } from "@/shared/stores/DynamicModalStore";
+import { Product } from "../services/productsService";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,21 +19,39 @@ export function createProductsTableColumns(onDelete?: (product: Product) => void
       accessorKey: "imageUrl",
       size: 80,
       header: ({ column }) => <TableColumnHeader column={column} columnName="Image" />,
-      cell: () => (
-        <div className="h-12 w-12 rounded-md bg-muted flex items-center justify-center">
-          <ImageIcon className="h-6 w-6 text-muted-foreground" />
-        </div>
-      ),
+      cell: ({ row }) => {
+        const imageUrl = row.original.imageUrl || (row.original.imageUrls && row.original.imageUrls[0]);
+        return imageUrl ? (
+          <img src={imageUrl} alt={row.original.nameEn || ""} className="h-12 w-12 rounded-md object-cover" />
+        ) : (
+          <div className="h-12 w-12 rounded-md bg-muted flex items-center justify-center">
+            <ImageIcon className="h-6 w-6 text-muted-foreground" />
+          </div>
+        );
+      },
     },
     {
       accessorKey: "nameEn",
       size: 280,
       header: ({ column }) => <TableColumnHeader column={column} columnName="Name" />,
-      cell: ({ row }) => (
-        <button className="font-medium text-primary hover:underline w-full truncate inline-block text-left">
-          {row.original.nameEn}
-        </button>
-      ),
+      cell: function NameCell({ row }) {
+        const openModal = useModalStore((state) => state.openModal);
+        return (
+          <button
+            className="font-medium text-primary hover:underline w-full truncate inline-block text-left"
+            onClick={() => openModal({
+              componentName: "product-details-drawer",
+              mode: "sheet",
+              sheetSide: "right",
+              modalTitle: "Product Details",
+              withCloseBtn: true,
+              extraProps: { product: row.original }
+            })}
+          >
+            {row.original.nameEn}
+          </button>
+        );
+      },
     },
     {
       accessorKey: "sku",
@@ -83,8 +102,8 @@ export function createProductsTableColumns(onDelete?: (product: Product) => void
               stock > 10
                 ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/20 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800"
                 : stock > 0
-                ? "bg-amber-100 text-amber-800 dark:bg-amber-950/20 dark:text-amber-400 border border-amber-200 dark:border-amber-800"
-                : "bg-red-100 text-red-800 dark:bg-red-950/20 dark:text-red-400 border border-red-200 dark:border-red-800"
+                  ? "bg-amber-100 text-amber-800 dark:bg-amber-950/20 dark:text-amber-400 border border-amber-200 dark:border-amber-800"
+                  : "bg-red-100 text-red-800 dark:bg-red-950/20 dark:text-red-400 border border-red-200 dark:border-red-800"
             }
           >
             {stock} left

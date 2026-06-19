@@ -12,7 +12,8 @@ import {
   SelectValue,
 } from "@/common/forms/select";
 import { FormLabel } from "@/common/forms/form";
-import { useCategories, useBrands, useUnits, useTaxes } from "@/modules/settings";
+import { useCategories, useUnits, useTaxes } from "@/modules/settings";
+import { useBrandsList } from "@/modules/brands/hooks/useBrands";
 import type { CreateProductInput } from "../../services/productsService";
 import { Tag, Package, BarChart3, DollarSign, Layers } from "lucide-react";
 
@@ -70,7 +71,7 @@ function SelectField({
 export default function ProductInfoSection({ form }: { form: UseFormReturn<CreateProductInput> }) {
   const { control } = form;
   const { data: categories = [] } = useCategories();
-  const { data: brands = [] } = useBrands();
+  const { data: brands = [] } = useBrandsList();
   const { data: units = [] } = useUnits();
   const { data: taxes = [] } = useTaxes();
 
@@ -128,7 +129,7 @@ export default function ProductInfoSection({ form }: { form: UseFormReturn<Creat
           <SelectField
             control={control} name="brandId" label="Brand"
             placeholder="Select brand (optional)"
-            options={brands.map((b) => ({ id: b.id, label: b.nameEn || b.nameAr }))}
+            options={brands.map((b) => ({ id: b.id || "", label: b.nameEn || b.nameAr || "Unnamed Brand" }))}
           />
         </div>
       </section>

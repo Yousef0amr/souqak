@@ -1,38 +1,8 @@
-﻿import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
 
 declare global {
-  interface Product {
-    id: string;
-    nameEn: string;
-    nameAr: string;
-    descriptionEn: string;
-    descriptionAr: string;
-    sku: string;
-    barcode: string;
-    categoryId: string;
-    categoryNameEn: string;
-    categoryNameAr: string;
-    brandId: string | null;
-    brandNameEn: string;
-    brandNameAr: string;
-    costPrice: number;
-    sellPrice: number;
-    stockQty: number;
-    reorderLevel: number;
-    baseUnitId: string;
-    baseUnitNameEn: string;
-    baseUnitNameAr: string;
-    purchaseUnitId: string | null;
-    conversionFactor: number;
-    taxId: string;
-    taxNameEn: string;
-    taxNameAr: string;
-    taxRate: number;
-    active: boolean;
-    imageUrl: string;
-    createdAt: string;
-    updatedAt: string | null;
-  }
+  // Exported Product type from productsService overrides this, so we define it as an alias
+  type Product = import("../services/productsService").Product;
 
   interface ProductsViewManagementProps {
     children?: (props: {

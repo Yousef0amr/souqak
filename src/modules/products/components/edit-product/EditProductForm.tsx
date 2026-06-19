@@ -7,6 +7,7 @@ import { Input } from "@/common/forms/input";
 import { Textarea } from "@/common/shared/textarea";
 import { Button } from "@/common/buttons/button";
 import { Save } from "lucide-react";
+import ProductImagesSection from "../add-product/ProductImagesSection";
 
 interface EditProductFormProps {
   productId?: string;
@@ -17,7 +18,7 @@ export default function EditProductForm({ productId, initialData }: EditProductF
   const { mutate: updateProduct, isPending } = useUpdateProduct();
   const closeModal = useModalStore((state) => state.closeModal);
 
-  const { register, handleSubmit } = useForm({
+  const form = useForm({
     defaultValues: {
       nameEn: initialData?.nameEn || initialData?.name || "",
       nameAr: initialData?.nameAr || "",
@@ -28,8 +29,11 @@ export default function EditProductForm({ productId, initialData }: EditProductF
       costPrice: initialData?.costPrice ?? initialData?.variant?.costPrice ?? 0,
       sellPrice: initialData?.sellPrice ?? initialData?.variant?.retailPrice ?? 0,
       stockQty: initialData?.stockQty ?? initialData?.variant?.stock ?? 0,
+      images: initialData?.imageUrls || [],
     },
   });
+
+  const { register, handleSubmit } = form;
 
   const onSubmit = (values: any) => {
     updateProduct(
@@ -45,6 +49,7 @@ export default function EditProductForm({ productId, initialData }: EditProductF
           costPrice: Number(values.costPrice),
           sellPrice: Number(values.sellPrice),
           stockQty: Number(values.stockQty),
+          images: values.images,
         },
       },
       { onSuccess: () => closeModal() }
@@ -97,6 +102,7 @@ export default function EditProductForm({ productId, initialData }: EditProductF
           <Input type="number" {...register("stockQty", { valueAsNumber: true })} />
         </div>
       </div>
+      <ProductImagesSection form={form as any} />
       <div className="flex justify-end gap-2 pt-2">
         <Button type="button" variant="outline" onClick={closeModal}>Cancel</Button>
         <Button type="submit" disabled={isPending}>

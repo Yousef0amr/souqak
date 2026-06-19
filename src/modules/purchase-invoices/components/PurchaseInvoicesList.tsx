@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
-import { usePurchaseInvoices, useApprovePurchaseInvoice, useDeletePurchaseInvoice } from "../hooks/usePurchaseInvoices";
+import { usePurchaseInvoices, useApprovePurchaseInvoice } from "../hooks/usePurchaseInvoices";
 import type { PurchaseInvoice } from "../services/purchaseInvoicesService";
 import { DataTable } from "@/common/tables/DataTable";
 import { Badge } from "@/common/shared/badge";
@@ -19,13 +19,10 @@ interface PurchaseInvoicesListProps {
 export function PurchaseInvoicesList({ onCreateNew }: PurchaseInvoicesListProps) {
   const { data: invoices = [], isLoading } = usePurchaseInvoices();
   const approveMutation = useApprovePurchaseInvoice();
-  const deleteMutation = useDeletePurchaseInvoice();
-
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedInvoice, setSelectedInvoice] = useState<PurchaseInvoice | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [approveTarget, setApproveTarget] = useState<string | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   const filteredInvoices = invoices.filter(
     (inv) =>
@@ -39,10 +36,7 @@ export function PurchaseInvoicesList({ onCreateNew }: PurchaseInvoicesListProps)
     setApproveTarget(id);
   };
 
-  const handleDelete = (e: React.MouseEvent, id: string) => {
-    e.stopPropagation();
-    setDeleteTarget(id);
-  };
+
 
   const columns: ColumnDef<PurchaseInvoice>[] = [
     {
@@ -99,14 +93,6 @@ export function PurchaseInvoicesList({ onCreateNew }: PurchaseInvoicesListProps)
                 <Check className="h-3 w-3 mr-1" /> Approve
               </Button>
             )}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-7 w-7 text-red-500"
-              onClick={(e) => handleDelete(e, inv.id)}
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-            </Button>
           </div>
         );
       },
@@ -159,19 +145,7 @@ export function PurchaseInvoicesList({ onCreateNew }: PurchaseInvoicesListProps)
         isLoading={approveMutation.isPending}
       />
 
-      <ConfirmDialog
-        open={!!deleteTarget}
-        onOpenChange={(open) => { if (!open) setDeleteTarget(null); }}
-        onConfirm={() => {
-          if (deleteTarget) {
-            deleteMutation.mutate(deleteTarget);
-            setDeleteTarget(null);
-          }
-        }}
-        title="Delete purchase invoice"
-        description="Are you sure you want to delete this purchase invoice?"
-        isLoading={deleteMutation.isPending}
-      />
+
 
       <Dialog open={!!selectedInvoice} onOpenChange={(open) => { if (!open) setSelectedInvoice(null); }}>
         <DialogContent className="sm:max-w-[550px]">

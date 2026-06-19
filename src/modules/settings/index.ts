@@ -1,20 +1,24 @@
-﻿export { SettingsPanel } from "./components/SettingsPanel";
 export {
   useCategories,
   useAddCategory,
   useUpdateCategory,
   useDeleteCategory,
-  useBrands,
-  useAddBrand,
-  useUpdateBrand,
-  useDeleteBrand,
+} from "./hooks/useCategories";
+
+export {
   useUnits,
   useAddUnit,
   useUpdateUnit,
   useDeleteUnit,
+} from "./hooks/useUnits";
+
+export {
   useTaxes,
   useAddTax,
   useUpdateTax,
   useDeleteTax,
-} from "./hooks/useSettings";
-export type { Category, Brand, Unit, Tax } from "./services/settingsService";
+} from "./hooks/useTaxes";
+
+export type { Category } from "./types/category";
+export type { Unit } from "./types/unit";
+export type { Tax } from "./types/tax";

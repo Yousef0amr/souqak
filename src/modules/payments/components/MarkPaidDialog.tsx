@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
-import { useMarkInvoicePaid } from "../hooks/usePayments";
+import { useMarkInvoicePaid } from "../index";
 import { Button } from "@/common/buttons/button";
 import { Input } from "@/common/forms/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/common/models/dialog";

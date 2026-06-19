@@ -1,10 +1,12 @@
-﻿import { DataTable } from "@/common/tables/DataTable";
+import { DataTable } from "@/common/tables/DataTable";
 import { createProductsTableColumns } from "../../utils/ProductsTableColumns";
 import PaginationWithPerPage from "@/shared/components/PaginationWithPerPage";
 import ProductsViewManagement from "../show-all-products/ProductsViewManagement";
 import { ProductGrid } from "../show-all-products/ProductGrid";
 import { ConfirmDialog } from "@/common/shared/confirm-dialog";
 import { useState } from "react";
+import { useModalStore } from "@/shared/stores/DynamicModalStore";
+import { Product } from "../../services/productsService";
 
 export function ProductTable({
   hiddenItems = [],
@@ -25,7 +27,16 @@ export function ProductTable({
       <ProductsViewManagement showFilter={true} hiddenItems={hiddenItems} columns={columns}>
         {({ columnVisibility, setColumnVisibility, view }) =>
           view === "grid" ? (
-            <ProductGrid data={data} onProductClick={() => {}} />
+            <ProductGrid data={data} onProductClick={(product) => {
+              useModalStore.getState().openModal({
+                componentName: "product-details-drawer",
+                mode: "sheet",
+                sheetSide: "right",
+                modalTitle: "Product Details",
+                withCloseBtn: true,
+                extraProps: { product }
+              });
+            }} />
           ) : (
             <DataTable
               data={data}

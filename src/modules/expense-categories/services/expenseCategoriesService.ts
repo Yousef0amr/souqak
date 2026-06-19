@@ -1,4 +1,11 @@
-import { axiosInstance } from "@/config/axiosInstance";
+import {
+  deleteApiExpenseCategoriesById,
+  getApiExpenseCategories,
+  getApiExpenseCategoriesById,
+  postApiExpenseCategories,
+  putApiExpenseCategoriesById,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface ExpenseCategory {
   id: string;
@@ -16,26 +23,57 @@ const mapDto = (dto: any): ExpenseCategory => ({
 
 export const expenseCategoriesService = {
   getAll: async (): Promise<ExpenseCategory[]> => {
-    const { data } = await axiosInstance.get<any[]>("/ExpenseCategories");
-    return data.map(mapDto);
+    const response = await getApiExpenseCategories({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapDto);
   },
 
   getById: async (id: string): Promise<ExpenseCategory> => {
-    const { data } = await axiosInstance.get<any>(`/ExpenseCategories/${id}`);
-    return mapDto(data);
+    const response = await getApiExpenseCategoriesById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto(response.data);
   },
 
   create: async (payload: { nameEn: string; nameAr?: string }): Promise<ExpenseCategory> => {
-    const { data } = await axiosInstance.post<any>("/ExpenseCategories", payload);
-    return mapDto(data);
+    const response = await postApiExpenseCategories({
+      client: swaggerApiClient,
+      body: {
+        nameEn: payload.nameEn,
+        nameAr: payload.nameAr,
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto(response.data);
   },
 
   update: async (id: string, payload: { nameEn?: string; nameAr?: string }): Promise<ExpenseCategory> => {
-    const { data } = await axiosInstance.put<any>(`/ExpenseCategories/${id}`, payload);
-    return mapDto(data);
+    const response = await putApiExpenseCategoriesById({
+      client: swaggerApiClient,
+      path: { id },
+      body: {
+        nameEn: payload.nameEn,
+        nameAr: payload.nameAr,
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto(response.data);
   },
 
   delete: async (id: string): Promise<void> => {
-    await axiosInstance.delete(`/ExpenseCategories/${id}`);
+    await deleteApiExpenseCategoriesById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
   },
 };

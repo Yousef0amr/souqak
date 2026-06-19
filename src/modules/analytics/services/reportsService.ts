@@ -1,4 +1,10 @@
-import { axiosInstance } from "@/config/axiosInstance";
+import {
+  getApiReportsSummary,
+  getApiReportsDailySales,
+  getApiReportsCategorySales,
+  getApiReportsBrandSales,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface ReportSummary {
   totalRevenue: number;
@@ -32,7 +38,12 @@ export interface BrandReport {
 
 export const reportsService = {
   getSummary: async (): Promise<ReportSummary> => {
-    const { data } = await axiosInstance.get<ReportSummary>("/Reports/summary");
+    const response = await getApiReportsSummary({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    const data = response.data;
     return {
       totalRevenue: data.totalRevenue ?? 0,
       totalOrders: data.totalOrders ?? 0,
@@ -43,11 +54,16 @@ export const reportsService = {
   },
 
   getDailySales: async (startDate?: string, endDate?: string): Promise<DailyReportRow[]> => {
-    const params: any = {};
-    if (startDate) params.StartDate = startDate;
-    if (endDate) params.EndDate = endDate;
-    const { data } = await axiosInstance.get<any[]>("/Reports/daily-sales", { params });
-    return data.map((d) => ({
+    const response = await getApiReportsDailySales({
+      client: swaggerApiClient,
+      query: {
+        StartDate: startDate,
+        EndDate: endDate,
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map((d: any) => ({
       date: d.date ? d.date.split("T")[0] : "",
       amount: d.amount ?? 0,
       orderCount: d.orderCount ?? 0,
@@ -55,11 +71,16 @@ export const reportsService = {
   },
 
   getCategorySales: async (startDate?: string, endDate?: string): Promise<CategoryReport[]> => {
-    const params: any = {};
-    if (startDate) params.StartDate = startDate;
-    if (endDate) params.EndDate = endDate;
-    const { data } = await axiosInstance.get<any[]>("/Reports/category-sales", { params });
-    return data.map((d) => ({
+    const response = await getApiReportsCategorySales({
+      client: swaggerApiClient,
+      query: {
+        StartDate: startDate,
+        EndDate: endDate,
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map((d: any) => ({
       categoryId: d.categoryId,
       categoryNameEn: d.categoryNameEn || "",
       categoryNameAr: d.categoryNameAr || "",
@@ -69,11 +90,16 @@ export const reportsService = {
   },
 
   getBrandSales: async (startDate?: string, endDate?: string): Promise<BrandReport[]> => {
-    const params: any = {};
-    if (startDate) params.StartDate = startDate;
-    if (endDate) params.EndDate = endDate;
-    const { data } = await axiosInstance.get<any[]>("/Reports/brand-sales", { params });
-    return data.map((d) => ({
+    const response = await getApiReportsBrandSales({
+      client: swaggerApiClient,
+      query: {
+        StartDate: startDate,
+        EndDate: endDate,
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map((d: any) => ({
       brandId: d.brandId,
       brandNameEn: d.brandNameEn || "",
       brandNameAr: d.brandNameAr || "",

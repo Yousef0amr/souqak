@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "generate:swagger-client": "npx @hey-api/openapi-ts -i swagger.json -o src/config/swagger-apis"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { useInventory } from "../hooks/useInventory";
-import { type Product } from "@/lib/api/mockDb";
+import { type Product } from "../services/inventoryService";
 import { AlertCircle, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/common/shared/badge";
 import { Button } from "@/common/buttons/button";

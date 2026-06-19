@@ -1,4 +1,11 @@
-import { axiosInstance } from "@/config/axiosInstance";
+import {
+  getApiPurchaseInvoices,
+  getApiPurchaseInvoicesById,
+  getApiPurchaseInvoicesPending,
+  postApiPurchaseInvoices,
+  postApiPurchaseInvoicesByIdApprove,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface PurchaseInvoiceItem {
   id: string;
@@ -74,18 +81,31 @@ const mapInvoiceDto = (dto: any): PurchaseInvoice => ({
 
 export const purchaseInvoicesService = {
   getAll: async (): Promise<PurchaseInvoice[]> => {
-    const { data } = await axiosInstance.get<any[]>("/PurchaseInvoices");
-    return data.map(mapInvoiceDto);
+    const response = await getApiPurchaseInvoices({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapInvoiceDto);
   },
 
   getById: async (id: string): Promise<PurchaseInvoice> => {
-    const { data } = await axiosInstance.get<any>(`/PurchaseInvoices/${id}`);
-    return mapInvoiceDto(data);
+    const response = await getApiPurchaseInvoicesById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapInvoiceDto(response as any);
   },
 
   getPending: async (): Promise<PurchaseInvoice[]> => {
-    const { data } = await axiosInstance.get<any[]>("/PurchaseInvoices/pending");
-    return data.map(mapInvoiceDto);
+    const response = await getApiPurchaseInvoicesPending({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapInvoiceDto);
   },
 
   create: async (payload: {
@@ -106,16 +126,48 @@ export const purchaseInvoicesService = {
       unitCost: number;
     }[];
   }): Promise<PurchaseInvoice> => {
-    const { data } = await axiosInstance.post<any>("/PurchaseInvoices", payload);
-    return mapInvoiceDto(data);
+    const response = await postApiPurchaseInvoices({
+      client: swaggerApiClient,
+      body: {
+        supplierInvoiceNumber: payload.supplierInvoiceNumber,
+        invoiceDate: payload.invoiceDate,
+        dueDate: payload.dueDate,
+        supplierId: payload.supplierId,
+        taxRate: payload.taxRate,
+        shippingCost: payload.shippingCost,
+        paymentMethod: payload.paymentMethod,
+        notes: payload.notes,
+        updateStockOnApproval: payload.updateStockOnApproval,
+        items: payload.items.map((item) => ({
+          productId: item.productId,
+          description: item.description ?? undefined,
+          descriptionAr: item.descriptionAr ?? undefined,
+          quantity: item.quantity,
+          unitCost: item.unitCost,
+        })),
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapInvoiceDto(response as any);
   },
 
   approve: async (id: string): Promise<PurchaseInvoice> => {
-    const { data } = await axiosInstance.post<any>(`/PurchaseInvoices/${id}/approve`);
-    return mapInvoiceDto(data);
+    const response = await postApiPurchaseInvoicesByIdApprove({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapInvoiceDto(response as any);
   },
 
-  delete: async (id: string): Promise<void> => {
-    await axiosInstance.delete(`/PurchaseInvoices/${id}`);
-  },
+  // delete: async (id: string): Promise<void> => {
+  //   await deleteApiPurchaseInvoicesById({
+  //     client: swaggerApiClient,
+  //     path: { id },
+  //     responseStyle: "data",
+  //     throwOnError: true,
+  //   });
+  // },
 };

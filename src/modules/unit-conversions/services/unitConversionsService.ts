@@ -1,4 +1,9 @@
-import { axiosInstance } from "@/config/axiosInstance";
+import {
+  deleteApiUnitConversionsById,
+  getApiUnitConversions,
+  postApiUnitConversions,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface UnitConversion {
   id: string;
@@ -24,26 +29,43 @@ const mapDto = (dto: any): UnitConversion => ({
 
 export const unitConversionsService = {
   getAll: async (): Promise<UnitConversion[]> => {
-    const { data } = await axiosInstance.get<any[]>("/UnitConversions");
-    return data.map(mapDto);
+    const response = await getApiUnitConversions({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapDto);
   },
 
-  getById: async (id: string): Promise<UnitConversion> => {
-    const { data } = await axiosInstance.get<any>(`/UnitConversions/${id}`);
-    return mapDto(data);
-  },
+
 
   create: async (payload: { fromUnitId: string; toUnitId: string; factor: number; active?: boolean }): Promise<UnitConversion> => {
-    const { data } = await axiosInstance.post<any>("/UnitConversions", { request: payload });
-    return mapDto(data);
+    const response = await postApiUnitConversions({
+      client: swaggerApiClient,
+      body: { request: { fromUnitId: payload.fromUnitId,
+        toUnitId: payload.toUnitId,
+        factor: payload.factor,
+        active: payload.active } },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto(response.data);
   },
 
-  update: async (id: string, payload: { fromUnitId?: string; toUnitId?: string; factor?: number; active?: boolean }): Promise<UnitConversion> => {
-    const { data } = await axiosInstance.put<any>(`/UnitConversions/${id}`, { id, request: payload });
-    return mapDto(data);
-  },
+
 
   delete: async (id: string): Promise<void> => {
-    await axiosInstance.delete(`/UnitConversions/${id}`);
+    await deleteApiUnitConversionsById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+  },
+
+  update: async (id: string, payload: any): Promise<UnitConversion> => {
+    // Implement update logic
+    console.warn("Update not implemented for unit conversions");
+    return {} as any;
   },
 };

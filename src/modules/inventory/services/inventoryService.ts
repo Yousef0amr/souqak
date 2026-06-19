@@ -1,4 +1,9 @@
-import { axiosInstance } from "@/config/axiosInstance";
+import {
+  getApiProductsById,
+  getApiProducts,
+  postApiInventoryByProductIdAddStock,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface Product {
   id: string;
@@ -44,19 +49,30 @@ const mapProductDto = (dto: any): Product => ({
 
 export const inventoryService = {
   getAllProducts: async (): Promise<Product[]> => {
-    const { data } = await axiosInstance.get<any[]>("/Products");
-    return data.map(mapProductDto);
+    const response = await getApiProducts({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapProductDto);
   },
 
   adjustStock: async (id: string, amount: number): Promise<Product | undefined> => {
-    // 1. Post stock adjustment
-    await axiosInstance.post(`/Inventory/${id}/add-stock`, {
-      quantityToAdd: amount,
-      note: "Manual stock adjustment via Admin Panel",
+    await postApiInventoryByProductIdAddStock({
+      client: swaggerApiClient,
+      path: { productId: id },
+      body: { quantityToAdd: amount, note: "Manual stock adjustment via Admin Panel" },
+      responseStyle: "data",
+      throwOnError: true,
     });
 
-    // 2. Fetch updated product detail to map it back correctly to the UI structure
-    const { data } = await axiosInstance.get<any>(`/Products/${id}`);
-    return mapProductDto(data);
+    const response = await getApiProductsById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+
+    return mapProductDto(response as any);
   },
 };

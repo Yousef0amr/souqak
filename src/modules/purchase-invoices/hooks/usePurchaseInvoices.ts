@@ -1,4 +1,4 @@
-﻿import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { purchaseInvoicesService, PurchaseInvoice } from "../services/purchaseInvoicesService";
 import { toast } from "sonner";
 
@@ -56,17 +56,4 @@ export function useApprovePurchaseInvoice() {
   });
 }
 
-export function useDeletePurchaseInvoice() {
-  const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: (id: string) => purchaseInvoicesService.delete(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["purchaseInvoices"] });
-      toast.success("Purchase Invoice deleted");
-    },
-    onError: (error: any) => {
-      toast.error(error?.response?.data?.title || "Failed to delete Purchase Invoice");
-    },
-  });
-}

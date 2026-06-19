@@ -1,5 +1,5 @@
-﻿export interface BrandDto {
-  id: string;
+export interface BrandDto {
+  id?: string;
   nameEn?: string | null;
   nameAr?: string | null;
   descriptionEn?: string | null;
@@ -7,7 +7,7 @@
   logoUrl?: string | null;
   website?: string | null;
   country?: string | null;
-  active: boolean;
+  active?: boolean;
   createdAt?: string;
 }
 
@@ -21,6 +21,7 @@ export interface CreateBrandCommand {
     website?: string | null;
     country?: string | null;
     active?: boolean;
+    image?: File | string | null;
   };
 }
 
@@ -35,5 +36,6 @@ export interface UpdateBrandCommand {
     website?: string | null;
     country?: string | null;
     active?: boolean;
+    image?: File | string | null;
   };
 }

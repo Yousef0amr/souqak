@@ -7,8 +7,8 @@ import { Button } from "@/common/buttons/button";
 import { Input } from "@/common/forms/input";
 import { Search, Plus, DollarSign, Wallet, FileText, Pencil, Trash2 } from "lucide-react";
 import { ConfirmDialog } from "@/common/shared/confirm-dialog";
-import { useExpenses, useCreateExpense, useDeleteExpense, useUpdateExpense } from "../hooks/usePayments";
-import { type Expense } from "../services/paymentsService";
+import { useExpenses, useCreateExpense, useDeleteExpense, useUpdateExpense } from "../index";
+import { type Expense } from "../index";
 import { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import {
   Dialog,

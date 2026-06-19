@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { DataTable } from "@/common/tables/DataTable";
@@ -7,7 +7,7 @@ import { Input } from "@/common/forms/input";
 import { Badge } from "@/common/shared/badge";
 import { Search, AlertCircle, Sparkles, Plus, Minus } from "lucide-react";
 import { useInventory, useAdjustStock } from "../hooks/useInventory";
-import { type Product } from "@/lib/api/mockDb";
+import { type Product } from "../services/inventoryService";
 import { ColumnDef, VisibilityState } from "@tanstack/react-table";
 
 export function InventoryTable() {

@@ -16,7 +16,7 @@ import { Badge } from "@/common/shared/badge";
 import { Progress } from "@/common/shared/progress";
 
 import { useProductsList } from "@/modules/products/hooks/useProducts";
-import { useCategories } from "@/modules/settings/hooks/useSettings";
+import { useCategories } from "@/modules/settings";
 import { useDashboardStats } from "./hooks/useDashboardStats";
 
 interface ProductOverviewProps {
@@ -41,7 +41,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onViewAll }) =
     }
 
     const recentProducts = [...products]
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
       .slice(0, 5);
 
     // Compute top categories based on product count

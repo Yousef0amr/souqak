@@ -10,7 +10,11 @@ async function handleProxy(
     context: { params: Promise<{ path: string[] }> }
 ) {
     const { path } = await context.params;
-    const endpointPath = path.join("/");
+    
+    // The swagger client includes '/api' in the generated paths, but our BACKEND_API_URL 
+    // already includes '/api'. To avoid '/api/api', we remove the leading 'api' segment.
+    const cleanPath = path[0] === 'api' ? path.slice(1) : path;
+    const endpointPath = cleanPath.join("/");
     
     const searchParams = request.nextUrl.searchParams.toString();
     const url = searchParams ? `/${endpointPath}?${searchParams}` : `/${endpointPath}`;
@@ -19,15 +23,20 @@ async function handleProxy(
         const method = request.method as Method;
         let requestBody = undefined;
 
-        // Parse JSON body for methods that support it
+        // Parse request body for methods that support it
         if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
-            try {
-                const text = await request.text();
-                if (text) {
-                    requestBody = JSON.parse(text);
+            const contentType = request.headers.get("content-type") || "";
+            if (contentType.includes("multipart/form-data")) {
+                requestBody = await request.formData();
+            } else {
+                try {
+                    const text = await request.text();
+                    if (text) {
+                        requestBody = JSON.parse(text);
+                    }
+                } catch (e) {
+                    // If it fails to parse, we leave requestBody undefined
                 }
-            } catch (e) {
-                // If it fails to parse, we leave requestBody undefined
             }
         }
 

@@ -1,4 +1,12 @@
-import { axiosInstance } from "@/config/axiosInstance";
+import {
+  deleteApiUsersById,
+  getApiUsers,
+  getApiUsersById,
+  postApiUsers,
+  postApiUsersChangePassword,
+  putApiUsersById,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface User {
   id: string;
@@ -20,30 +28,73 @@ const mapDto = (dto: any): User => ({
 
 export const usersService = {
   getAll: async (): Promise<User[]> => {
-    const { data } = await axiosInstance.get<any[]>("/Users");
-    return data.map(mapDto);
+    const response = await getApiUsers({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapDto);
   },
 
   getById: async (id: string): Promise<User> => {
-    const { data } = await axiosInstance.get<any>(`/Users/${id}`);
-    return mapDto(data);
+    const response = await getApiUsersById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto(response.data);
   },
 
   create: async (payload: { name: string; email: string; password: string; role: string }): Promise<User> => {
-    const { data } = await axiosInstance.post<any>("/Users", payload);
-    return mapDto(data);
+    const response = await postApiUsers({
+      client: swaggerApiClient,
+      body: {
+        name: payload.name,
+        email: payload.email,
+        password: payload.password,
+        role: payload.role,
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto(response.data);
   },
 
   update: async (id: string, payload: { name?: string; email?: string; role?: string; active?: boolean }): Promise<User> => {
-    const { data } = await axiosInstance.put<any>(`/Users/${id}`, { id, ...payload });
-    return mapDto(data);
+    const response = await putApiUsersById({
+      client: swaggerApiClient,
+      path: { id },
+      body: {
+        name: payload.name,
+        email: payload.email,
+        role: payload.role,
+        active: payload.active,
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto(response.data);
   },
 
   delete: async (id: string): Promise<void> => {
-    await axiosInstance.delete(`/Users/${id}`);
+    await deleteApiUsersById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
   },
 
   changePassword: async (payload: { oldPassword: string; newPassword: string; confirmPassword: string }): Promise<void> => {
-    await axiosInstance.post("/Users/change-password", payload);
+    await postApiUsersChangePassword({
+      client: swaggerApiClient,
+      body: {
+        currentPassword: payload.oldPassword,
+        newPassword: payload.newPassword,
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
   },
 };

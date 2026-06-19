@@ -54,6 +54,7 @@ function DialogContent({
           // Layout
           "fixed top-[50%] left-[50%] z-50 translate-x-[-50%] translate-y-[-50%]",
           "w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
+          "flex flex-col max-h-[calc(100vh-4rem)]",
           // Appearance
           "bg-card border border-border/60 rounded-2xl shadow-2xl",
           "overflow-hidden",
@@ -123,7 +124,7 @@ function DialogBody({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-body"
-      className={cn("px-6 py-5", className)}
+      className={cn("px-6 py-5 overflow-y-auto flex-1", className)}
       {...props}
     />
   );

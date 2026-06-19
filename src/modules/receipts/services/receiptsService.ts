@@ -1,4 +1,10 @@
-import { axiosInstance } from "@/config/axiosInstance";
+
+import {
+  getApiReceiptsById,
+  getApiReceiptsOrderByOrderId,
+  putApiReceiptsById,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface Receipt {
   id: string;
@@ -30,17 +36,33 @@ const mapDto = (dto: any): Receipt => ({
 
 export const receiptsService = {
   getById: async (id: string): Promise<Receipt> => {
-    const { data } = await axiosInstance.get<any>(`/Receipts/${id}`);
-    return mapDto(data);
+    const response = await getApiReceiptsById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto(response.data);
   },
 
   getByOrderId: async (orderId: string): Promise<Receipt[]> => {
-    const { data } = await axiosInstance.get<any[]>(`/Receipts/order/${orderId}`);
-    return data.map(mapDto);
+    const response = await getApiReceiptsOrderByOrderId({
+      client: swaggerApiClient,
+      path: { orderId },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return [mapDto(response.data)];
   },
 
   void: async (id: string): Promise<Receipt> => {
-    const { data } = await axiosInstance.put<any>(`/Receipts/${id}`, { void: true });
-    return mapDto(data);
+    const response = await putApiReceiptsById({
+      client: swaggerApiClient,
+      path: { id },
+      body: { void: true } as any,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapDto((response as any)?.data ?? response);
   },
 };

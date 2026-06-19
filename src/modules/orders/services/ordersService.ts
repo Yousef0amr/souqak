@@ -1,4 +1,9 @@
-import { axiosInstance } from "@/config/axiosInstance";
+import {
+  getApiOrders,
+  getApiOrdersById,
+  postApiOrders,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface Order {
   id: string;
@@ -36,27 +41,39 @@ const mapOrderDto = (dto: any): Order => ({
 
 export const ordersService = {
   getAll: async (): Promise<Order[]> => {
-    const { data } = await axiosInstance.get<any[]>("/Orders");
-    return data.map(mapOrderDto);
+    const response = await getApiOrders({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapOrderDto);
   },
 
   getById: async (id: string): Promise<Order> => {
-    const { data } = await axiosInstance.get<any>(`/Orders/${id}`);
-    return mapOrderDto(data);
+    const response = await getApiOrdersById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapOrderDto(response as any);
   },
 
   create: async (order: Omit<Order, "id" | "orderNumber" | "date">): Promise<Order> => {
-    const requestPayload = {
-      paymentMethod: order.paymentMethod,
-      amountPaid: order.total,
-      notes: `POS Checkout - ${order.itemsCount} items`,
-      items: order.items.map((item) => ({
-        productId: item.productId,
-        quantity: item.quantity,
-      })),
-    };
-
-    const { data } = await axiosInstance.post<any>("/Orders", requestPayload);
-    return mapOrderDto(data);
+    const response = await postApiOrders({
+      client: swaggerApiClient,
+      body: {
+        paymentMethod: order.paymentMethod,
+        amountPaid: order.total,
+        notes: `POS Checkout - ${order.itemsCount} items`,
+        items: order.items.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+        })),
+      },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapOrderDto(response as any);
   },
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback } from "@/common/shared/avatar";
 import { cn } from "@/config/shadcnUtils";
@@ -165,8 +165,14 @@ function TopBar() {
   const setSearchOpen = useSearchStore((s) => s.setOpen);
   const [themePanelOpen, setThemePanelOpen] = useState(false);
 
+  // Hydration fix for next-themes
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Determine mode indicator text
-  const modeLabel = theme ?? "system";
+  const modeLabel = mounted ? (theme ?? "system") : "system";
 
   return (
     <>
@@ -208,16 +214,6 @@ function TopBar() {
 
             {/* Notifications */}
             <NotificationPanel />
-
-            {/* Settings shortcut */}
-            <button
-              id="topbar-settings"
-              aria-label="Settings"
-              onClick={() => window.location.href = "/dashboard/settings"}
-              className="hidden sm:flex p-2.5 text-muted-foreground hover:text-foreground hover:bg-primary/10 rounded-lg transition-all duration-200 hover:shadow-sm"
-            >
-              <Settings className="h-5 w-5" />
-            </button>
 
             {/* Profile Dropdown */}
             <DropdownMenu>

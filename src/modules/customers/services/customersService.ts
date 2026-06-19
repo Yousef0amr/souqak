@@ -1,4 +1,12 @@
-import { axiosInstance } from "@/config/axiosInstance";
+import {
+  deleteApiCustomersById,
+  getApiCustomers,
+  getApiCustomersById,
+  getApiCustomersByIdInvoices,
+  postApiCustomers,
+  putApiCustomersById,
+} from "@/config/swagger-apis";
+import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
 
 export interface Customer {
   id: string;
@@ -46,15 +54,24 @@ const mapInvoiceDto = (dto: any): CustomerInvoice => ({
 
 export const customersService = {
   getAll: async (): Promise<Customer[]> => {
-    const { data } = await axiosInstance.get<any[]>("/Customers");
-    return data.map(mapCustomerDto);
+    const response = await getApiCustomers({
+      client: swaggerApiClient,
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapCustomerDto);
   },
-  
+
   getById: async (id: string): Promise<Customer> => {
-    const { data } = await axiosInstance.get<any>(`/Customers/${id}`);
-    return mapCustomerDto(data);
+    const response = await getApiCustomersById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapCustomerDto(response as any);
   },
-  
+
   create: async (payload: {
     nameEn: string;
     nameAr?: string;
@@ -63,13 +80,17 @@ export const customersService = {
     address?: string;
     taxNumber?: string;
   }): Promise<Customer> => {
-    const command = { request: payload };
-    const { data } = await axiosInstance.post<any>("/Customers", command);
-    return mapCustomerDto(data);
+    const response = await postApiCustomers({
+      client: swaggerApiClient,
+      body: { request: payload },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapCustomerDto(response as any);
   },
-  
+
   update: async (
-    id: string, 
+    id: string,
     payload: {
       nameEn: string;
       nameAr?: string;
@@ -79,17 +100,32 @@ export const customersService = {
       taxNumber?: string;
     }
   ): Promise<Customer> => {
-    const command = { id, request: payload };
-    const { data } = await axiosInstance.put<any>(`/Customers/${id}`, command);
-    return mapCustomerDto(data);
+    const response = await putApiCustomersById({
+      client: swaggerApiClient,
+      path: { id },
+      body: { request: payload },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return mapCustomerDto(response as any);
   },
-  
+
   delete: async (id: string): Promise<void> => {
-    await axiosInstance.delete(`/Customers/${id}`);
+    await deleteApiCustomersById({
+      client: swaggerApiClient,
+      path: { id },
+      responseStyle: "data",
+      throwOnError: true,
+    });
   },
-  
+
   getInvoices: async (customerId: string): Promise<CustomerInvoice[]> => {
-    const { data } = await axiosInstance.get<any[]>(`/Customers/${customerId}/invoices`);
-    return data.map(mapInvoiceDto);
+    const response = await getApiCustomersByIdInvoices({
+      client: swaggerApiClient,
+      path: { id: customerId },
+      responseStyle: "data",
+      throwOnError: true,
+    });
+    return (Array.isArray(response) ? response : ((response as any)?.data ?? [])).map(mapInvoiceDto);
   },
 };

@@ -44,6 +44,11 @@ import UnitForm from "@/modules/settings/components/UnitForm";
 import TaxForm from "@/modules/settings/components/TaxForm";
 import CustomerForm from "@/modules/customers/components/CustomerForm";
 import ExpenseCategoryForm from "@/modules/expense-categories/components/ExpenseCategoryForm";
+import StoreForm from "@/modules/stores/components/StoreForm";
+import ProductDetailsDrawer from "@/modules/products/components/shared/ProductDetailsDrawer";
+import AuditLogDetailsModal from "@/modules/audit-logs/components/molecules/AuditLogDetailsModal";
+import CreateRoleForm from "@/modules/roles/components/molecules/CreateRoleDialog";
+import EditRoleForm from "@/modules/roles/components/molecules/EditRoleForm";
 
 const componentsMap: Record<string, React.ComponentType<any>> = {
   "add-product": AddProducts,
@@ -56,6 +61,11 @@ const componentsMap: Record<string, React.ComponentType<any>> = {
   "tax-form": TaxForm,
   "customer-form": CustomerForm,
   "expense-category-form": ExpenseCategoryForm,
+  "store-form": StoreForm,
+  "product-details-drawer": ProductDetailsDrawer,
+  "audit-log-details": AuditLogDetailsModal,
+  "create-role-form": CreateRoleForm,
+  "edit-role-form": EditRoleForm,
 };
 
 export function DynamicModalContent() {
