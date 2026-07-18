@@ -30,7 +30,7 @@ function DialogOverlay({
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-black/60 backdrop-blur-sm",
+        "fixed inset-0 z-50 bg-black/50 backdrop-blur-md",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className
@@ -55,8 +55,12 @@ function DialogContent({
           "fixed top-[50%] left-[50%] z-50 translate-x-[-50%] translate-y-[-50%]",
           "w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
           "flex flex-col max-h-[calc(100vh-4rem)]",
-          // Appearance
-          "bg-card border border-border/60 rounded-2xl shadow-2xl",
+          // Glass appearance (theme-aware)
+          "bg-[var(--glass-bg-strong)] backdrop-blur-2xl",
+          "border border-[var(--glass-border-strong)] rounded-2xl",
+          "shadow-[var(--glass-inset),var(--glass-shadow)]",
+          "before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:opacity-60",
+          "before:bg-linear-to-b before:from-[var(--glass-highlight)] before:to-transparent",
           "overflow-hidden",
           // Animation
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
@@ -68,25 +72,27 @@ function DialogContent({
         {...props}
       >
         {/* Top accent line */}
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-primary/70 to-transparent rounded-t-2xl" />
+        <div className="absolute top-0 left-0 right-0 z-10 h-[3px] bg-gradient-to-r from-primary via-primary/70 to-transparent rounded-t-2xl" />
 
-        {children}
+        <div className="relative z-10 flex flex-col max-h-[calc(100vh-4rem)]">
+          {children}
 
-        {/* Close button */}
-        <DialogPrimitive.Close
-          className={cn(
-            "absolute top-4 right-4 z-10",
-            "flex h-7 w-7 items-center justify-center rounded-lg",
-            "text-muted-foreground hover:text-foreground",
-            "hover:bg-muted transition-all duration-150",
-            "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-            "disabled:pointer-events-none",
-            "[&_svg]:pointer-events-none [&_svg]:shrink-0"
-          )}
-        >
-          <XIcon className="h-4 w-4" />
-          <span className="sr-only">Close</span>
-        </DialogPrimitive.Close>
+          {/* Close button */}
+          <DialogPrimitive.Close
+            className={cn(
+              "absolute top-4 right-4 z-20",
+              "flex h-7 w-7 items-center justify-center rounded-lg",
+              "text-muted-foreground hover:text-foreground",
+              "hover:bg-[var(--glass-bg)] transition-all duration-150",
+              "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "disabled:pointer-events-none",
+              "[&_svg]:pointer-events-none [&_svg]:shrink-0"
+            )}
+          >
+            <XIcon className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        </div>
       </DialogPrimitive.Content>
     </DialogPortal>
   );

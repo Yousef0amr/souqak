@@ -32,19 +32,21 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         // Base layout
-        "flex w-full items-center justify-between gap-2 rounded-xl border bg-background px-3.5 py-2 text-sm whitespace-nowrap",
+        "flex w-full items-center justify-between gap-2 rounded-xl px-3.5 py-2 text-sm whitespace-nowrap",
+        // Glass background (theme-aware)
+        "bg-[var(--glass-bg)] backdrop-blur-xl text-foreground border shadow-[var(--glass-inset)]",
         // Height
         "data-[size=default]:h-11 data-[size=sm]:h-9",
         // Border & focus
-        "border-input outline-none transition-[border-color,box-shadow] duration-200",
-        "focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20",
-        "hover:border-border",
+        "border-[var(--glass-border-strong)] outline-none transition-[border-color,box-shadow,background-color] duration-200",
+        "focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/25 focus-visible:bg-[var(--glass-bg-strong)]",
+        "hover:border-[var(--glass-border-strong)]",
         // Placeholder
         "data-[placeholder]:text-muted-foreground/60",
         // Invalid
         "aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20",
         // Disabled
-        "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted/50",
+        "disabled:cursor-not-allowed disabled:opacity-50",
         // Icons
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "[&_svg:not([class*='text-'])]:text-muted-foreground",
@@ -73,9 +75,12 @@ function SelectContent({
       <SelectPrimitive.Content
         data-slot="select-content"
         className={cn(
-          "bg-popover text-popover-foreground",
+          "text-popover-foreground",
           "relative z-50 min-w-[8rem] overflow-x-hidden overflow-y-auto",
-          "rounded-xl border border-border/60 shadow-xl",
+          // Glass panel (theme-aware)
+          "bg-[var(--glass-bg-strong)] backdrop-blur-2xl text-popover-foreground",
+          "rounded-xl border border-[var(--glass-border-strong)]",
+          "shadow-[var(--glass-inset),var(--glass-shadow)]",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
           "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -156,7 +161,7 @@ function SelectSeparator({
   return (
     <SelectPrimitive.Separator
       data-slot="select-separator"
-      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
+      className={cn("bg-[var(--glass-border)] pointer-events-none -mx-1 my-1 h-px", className)}
       {...props}
     />
   );

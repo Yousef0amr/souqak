@@ -4,7 +4,7 @@ import { cn } from "@/config/shadcnUtils";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <div className="relative w-full overflow-x-auto">
+    <div className="relative w-full overflow-x-auto rounded-xl">
       <table
         data-slot="table"
         className={cn("w-full caption-bottom text-sm", className)}
@@ -19,7 +19,7 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
     <thead
       data-slot="table-header"
       className={cn(
-        "sticky top-0 z-10 bg-muted/60 backdrop-blur-sm [&_tr]:border-b [&_tr]:border-border/60",
+        "sticky top-0 z-10 bg-[var(--glass-bg-strong)] backdrop-blur-xl [&_tr]:border-b [&_tr]:border-[var(--glass-border)]",
         className
       )}
       {...props}
@@ -42,7 +42,7 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
     <tfoot
       data-slot="table-footer"
       className={cn(
-        "bg-muted/40 border-t border-border/50 font-medium text-sm [&>tr]:last:border-b-0",
+        "bg-[var(--glass-bg-subtle)] backdrop-blur-md border-t border-[var(--glass-border)] font-medium text-sm [&>tr]:last:border-b-0",
         className
       )}
       {...props}
@@ -55,9 +55,9 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
     <tr
       data-slot="table-row"
       className={cn(
-        "border-b border-border/40 transition-colors duration-150",
-        "hover:bg-primary/[0.04]",
-        "data-[state=selected]:bg-primary/[0.08] data-[state=selected]:border-primary/20",
+        "border-b border-[var(--glass-border)] transition-colors duration-150",
+        "hover:bg-[var(--glass-bg-subtle)]",
+        "data-[state=selected]:bg-primary/10 data-[state=selected]:border-primary/20",
         className
       )}
       {...props}

@@ -24,6 +24,8 @@ import {
   Award,
   Ruler,
   Percent,
+  UtensilsCrossed,
+  Pizza,
 } from "lucide-react";
 import { Link, usePathname } from "@/config/i18n/navigation";
 import logo from "@/assets/souqak.png";
@@ -49,6 +51,8 @@ import { SearchCommand } from "@/modules/search/components/SearchCommand";
 import { Avatar, AvatarFallback } from "@/common/shared/avatar";
 import { useUserStore } from "@/modules/auth/stores/useUserStore";
 import useLogout from "@/modules/auth/hooks/useLogout";
+import { useSettingsStore } from "@/modules/settings/stores/useSettingsStore";
+import { BusinessMode } from "@/types/business-mode";
 import { cn } from "@/config/shadcnUtils";
 
 // ─── Navigation config ────────────────────────────────────────────────────────
@@ -90,20 +94,28 @@ const systemItems = [
   { to: "/dashboard/integrations",       label: "Integrations",        icon: Plug },
 ];
 
-// ─── Nav group definition ─────────────────────────────────────────────────────
-const NAV_GROUPS = [
-  { label: "Overview",    items: mainItems },
-  { label: "Sales",       items: salesItems },
-  { label: "Operations",  items: operationsItems },
-  { label: "Setup",       items: setupItems },
-  { label: "System",      items: systemItems },
-] as const;
+const diningItems = [
+  { to: "/dashboard/tables",    label: "Tables",    icon: UtensilsCrossed },
+  { to: "/dashboard/modifiers", label: "Modifiers", icon: Pizza },
+];
 
 // ─── AppSidebar ───────────────────────────────────────────────────────────────
 export function AppSidebar({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const user = useUserStore((state) => state.user);
+  const businessMode = useSettingsStore((state) => state.settings.businessMode);
   const { logout } = useLogout();
+
+  const navGroups = [
+    { label: "Overview",    items: mainItems },
+    { label: "Sales",       items: salesItems },
+    ...(businessMode === BusinessMode.restaurant
+      ? [{ label: "Dining", items: diningItems }]
+      : []),
+    { label: "Operations",  items: operationsItems },
+    { label: "Setup",       items: setupItems },
+    { label: "System",      items: systemItems },
+  ];
 
   const isActive = (to: string) =>
     pathname === to || (to !== "/dashboard" && pathname.startsWith(to + "/"));
@@ -168,7 +180,7 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
 
         {/* ── Navigation ────────────────────────────────────── */}
         <SidebarContent className="py-3 px-1.5">
-          {NAV_GROUPS.map((group, gi) => (
+          {navGroups.map((group, gi) => (
             <SidebarGroup key={group.label} className={gi > 0 ? "mt-1" : ""}>
               <SidebarGroupLabel className="text-[10px] uppercase tracking-widest text-sidebar-foreground/35 px-3 mb-1 flex items-center gap-2">
                 {gi > 0 && <div className="flex-1 h-px bg-sidebar-border/40" />}

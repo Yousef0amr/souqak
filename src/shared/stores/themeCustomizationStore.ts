@@ -31,6 +31,18 @@ export const BORDER_RADIUS_MAP: Record<BorderRadiusOption, string> = {
   relaxed: "20px",
 };
 
+// ─── Animation Intensity ──────────────────────────────────────────────────────
+export type AnimationIntensityOption = "subtle" | "standard" | "expressive";
+
+export const ANIMATION_INTENSITY_MAP: Record<AnimationIntensityOption, string> = {
+  subtle: "0.15s",
+  standard: "0.3s",
+  expressive: "0.5s",
+};
+
+// ─── Dark Style Options ───────────────────────────────────────────────────────
+export type DarkStyleOption = "slate" | "zinc" | "pureBlack";
+
 // ─── Font Scale Options ───────────────────────────────────────────────────────
 export type FontScaleOption = "sm" | "md" | "lg";
 
@@ -45,11 +57,15 @@ export interface ThemeCustomizationState {
   accentId: string;
   borderRadius: BorderRadiusOption;
   fontScale: FontScaleOption;
+  animationIntensity: AnimationIntensityOption;
+  darkStyle: DarkStyleOption;
 
   // Actions
   setAccent: (id: string) => void;
   setBorderRadius: (r: BorderRadiusOption) => void;
   setFontScale: (f: FontScaleOption) => void;
+  setAnimationIntensity: (i: AnimationIntensityOption) => void;
+  setDarkStyle: (d: DarkStyleOption) => void;
   reset: () => void;
 }
 
@@ -57,6 +73,8 @@ const DEFAULT_STATE = {
   accentId: "default",
   borderRadius: "default" as BorderRadiusOption,
   fontScale: "md" as FontScaleOption,
+  animationIntensity: "standard" as AnimationIntensityOption,
+  darkStyle: "slate" as DarkStyleOption,
 };
 
 export const useThemeCustomizationStore = create<ThemeCustomizationState>()(
@@ -67,6 +85,8 @@ export const useThemeCustomizationStore = create<ThemeCustomizationState>()(
       setAccent: (id) => set({ accentId: id }),
       setBorderRadius: (r) => set({ borderRadius: r }),
       setFontScale: (f) => set({ fontScale: f }),
+      setAnimationIntensity: (i) => set({ animationIntensity: i }),
+      setDarkStyle: (d) => set({ darkStyle: d }),
       reset: () => set(DEFAULT_STATE),
     }),
     {
@@ -79,10 +99,15 @@ export const useThemeCustomizationStore = create<ThemeCustomizationState>()(
 export const useAccentId      = () => useThemeCustomizationStore((s) => s.accentId);
 export const useBorderRadius  = () => useThemeCustomizationStore((s) => s.borderRadius);
 export const useFontScale     = () => useThemeCustomizationStore((s) => s.fontScale);
+export const useAnimationIntensity = () => useThemeCustomizationStore((s) => s.animationIntensity);
+export const useDarkStyle = () => useThemeCustomizationStore((s) => s.darkStyle);
+
 export const useThemeCustomActions = () =>
   useThemeCustomizationStore((s) => ({
-    setAccent:        s.setAccent,
-    setBorderRadius:  s.setBorderRadius,
-    setFontScale:     s.setFontScale,
-    reset:            s.reset,
+    setAccent:             s.setAccent,
+    setBorderRadius:       s.setBorderRadius,
+    setFontScale:          s.setFontScale,
+    setAnimationIntensity: s.setAnimationIntensity,
+    setDarkStyle:          s.setDarkStyle,
+    reset:                 s.reset,
   }));

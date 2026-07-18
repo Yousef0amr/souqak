@@ -41,6 +41,15 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Liquid Glass — mapped from per-theme tokens */
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-bg-strong: var(--glass-bg-strong);
+  --color-glass-bg-subtle: var(--glass-bg-subtle);
+  --color-glass-border: var(--glass-border);
+  --color-glass-border-strong: var(--glass-border-strong);
+  --color-glass-text: var(--glass-text);
+  --color-glass-text-muted: var(--glass-text-muted);
 }
 
 /* ============================================
@@ -119,6 +128,23 @@
   --shimmer-from: #f3f4f6;
   --shimmer-via: #e5e7eb;
   --shimmer-to: #f3f4f6;
+
+  /* ── Liquid Glass tokens (light theme) ──
+     Frosted-glass surfaces tuned for legibility on light backgrounds.
+     Glass reads as a translucent white panel with a soft tint + blur. */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.75);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.35);
+  --glass-border: rgba(15, 23, 42, 0.1);
+  --glass-border-strong: rgba(15, 23, 42, 0.18);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+  --glass-ring: rgba(255, 255, 255, 0.6);
+  --glass-text: rgba(17, 24, 39, 0.95);
+  --glass-text-muted: rgba(17, 24, 39, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px -8px rgba(15, 23, 42, 0.18);
+  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 /* ============================================
@@ -189,6 +215,22 @@
   --shimmer-from: #1f2937;
   --shimmer-via: #374151;
   --shimmer-to: #1f2937;
+
+  /* ── Liquid Glass tokens (dark theme) ──
+     Classic liquid-glass: translucent dark panel with white sheen + blur. */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.1);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(255, 255, 255, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+  --glass-ring: rgba(255, 255, 255, 0.2);
+  --glass-text: rgba(230, 237, 243, 0.95);
+  --glass-text-muted: rgba(230, 237, 243, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================
@@ -247,6 +289,21 @@
   --shimmer-from: #f1f5f9;
   --shimmer-via: #dbeafe;
   --shimmer-to: #f1f5f9;
+
+  /* ── Liquid Glass tokens (primary light theme) ── */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.75);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.35);
+  --glass-border: rgba(15, 23, 42, 0.1);
+  --glass-border-strong: rgba(15, 23, 42, 0.18);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+  --glass-ring: rgba(255, 255, 255, 0.6);
+  --glass-text: rgba(15, 23, 42, 0.95);
+  --glass-text-muted: rgba(15, 23, 42, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px -8px rgba(15, 23, 42, 0.18);
+  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .primary.dark {
@@ -302,6 +359,21 @@
   --shimmer-from: #0f1a2e;
   --shimmer-via: #1e2d45;
   --shimmer-to: #0f1a2e;
+
+  /* ── Liquid Glass tokens (primary dark theme) ── */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.1);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(255, 255, 255, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+  --glass-ring: rgba(255, 255, 255, 0.2);
+  --glass-text: rgba(224, 242, 254, 0.95);
+  --glass-text-muted: rgba(224, 242, 254, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================
@@ -360,6 +432,22 @@
   --shimmer-from: #fef9c3;
   --shimmer-via: #fde68a;
   --shimmer-to: #fef9c3;
+
+  /* ── Liquid Glass tokens (vip light theme) ──
+     Warm tinted glass to match the gold premium palette. */
+  --glass-bg: rgba(255, 252, 235, 0.6);
+  --glass-bg-strong: rgba(255, 252, 235, 0.8);
+  --glass-bg-subtle: rgba(255, 252, 235, 0.38);
+  --glass-border: rgba(120, 53, 15, 0.12);
+  --glass-border-strong: rgba(120, 53, 15, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+  --glass-ring: rgba(255, 255, 255, 0.6);
+  --glass-text: rgba(28, 25, 23, 0.95);
+  --glass-text-muted: rgba(28, 25, 23, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px -8px rgba(120, 53, 15, 0.2);
+  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .vip.dark {
@@ -415,6 +503,406 @@
   --shimmer-from: #211b04;
   --shimmer-via: #2d2408;
   --shimmer-to: #211b04;
+
+  /* ── Liquid Glass tokens (vip dark theme) ── */
+  --glass-bg: rgba(245, 158, 11, 0.06);
+  --glass-bg-strong: rgba(245, 158, 11, 0.1);
+  --glass-bg-subtle: rgba(245, 158, 11, 0.03);
+  --glass-border: rgba(245, 158, 11, 0.16);
+  --glass-border-strong: rgba(245, 158, 11, 0.24);
+  --glass-highlight: rgba(255, 255, 255, 0.12);
+  --glass-ring: rgba(245, 158, 11, 0.24);
+  --glass-text: rgba(254, 252, 232, 0.95);
+  --glass-text-muted: rgba(254, 252, 232, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   MIDNIGHT — PURE BLACK OLED THEME
+   ============================================ */
+.midnight {
+  --background: #000000;
+  --foreground: #ffffff;
+
+  --card: #080810;
+  --card-foreground: #ffffff;
+
+  --popover: #080810;
+  --popover-foreground: #ffffff;
+
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+
+  --secondary: #10101c;
+  --secondary-foreground: #a5b4fc;
+
+  --muted: #10101c;
+  --muted-foreground: #777799;
+
+  --accent: #1e1b4b;
+  --accent-foreground: #a78bfa;
+
+  --destructive: #f87171;
+  --destructive-foreground: #000000;
+
+  --border: #1c1c2e;
+  --input: #10101c;
+  --ring: #6366f1;
+
+  --surface: #10101c;
+  --surface-foreground: #ffffff;
+
+  --sidebar: #000000;
+  --sidebar-foreground: #e6e6f5;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #10101c;
+  --sidebar-accent-foreground: #a78bfa;
+  --sidebar-border: #16162a;
+  --sidebar-ring: #6366f1;
+
+  --chart-1: #6366f1;
+  --chart-2: #a78bfa;
+  --chart-3: #38bdf8;
+  --chart-4: #fbbf24;
+  --chart-5: #f472b6;
+
+  --primary-gradient-from: #6366f1;
+  --primary-gradient-to: #a78bfa;
+  --shadow-1: rgba(99, 102, 241, 0.18);
+  --shadow-2: rgba(167, 139, 250, 0.12);
+
+  --gradient-hero: linear-gradient(135deg, #1e1b4b 0%, #4338ca 50%, #6d28d9 100%);
+  --gradient-hero-subtle: linear-gradient(135deg, rgba(30,27,75,0.4) 0%, rgba(109,40,217,0.2) 100%);
+
+  --shimmer-from: #10101c;
+  --shimmer-via: #1c1c2e;
+  --shimmer-to: #10101c;
+
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-strong: rgba(255, 255, 255, 0.09);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.025);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-strong: rgba(255, 255, 255, 0.18);
+  --glass-highlight: rgba(255, 255, 255, 0.14);
+  --glass-ring: rgba(255, 255, 255, 0.18);
+  --glass-text: rgba(255, 255, 255, 0.95);
+  --glass-text-muted: rgba(255, 255, 255, 0.5);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   DESERT — WARM AMBER/SAND THEME
+   ============================================ */
+.desert {
+  --background: #1a1208;
+  --foreground: #fef3c7;
+
+  --card: #221a0a;
+  --card-foreground: #fef3c7;
+
+  --popover: #221a0a;
+  --popover-foreground: #fef3c7;
+
+  --primary: #d97706;
+  --primary-foreground: #ffffff;
+
+  --secondary: #2e2210;
+  --secondary-foreground: #fde68a;
+
+  --muted: #2e2210;
+  --muted-foreground: #a16207;
+
+  --accent: #3a2c12;
+  --accent-foreground: #fbbf24;
+
+  --destructive: #f87171;
+  --destructive-foreground: #1a1208;
+
+  --border: #3a2c12;
+  --input: #2e2210;
+  --ring: #d97706;
+
+  --surface: #2e2210;
+  --surface-foreground: #fef3c7;
+
+  --sidebar: #120c04;
+  --sidebar-foreground: #fef3c7;
+  --sidebar-primary: #f59e0b;
+  --sidebar-primary-foreground: #1a1208;
+  --sidebar-accent: #221a0a;
+  --sidebar-accent-foreground: #fbbf24;
+  --sidebar-border: #2e2210;
+  --sidebar-ring: #f59e0b;
+
+  --chart-1: #f59e0b;
+  --chart-2: #d97706;
+  --chart-3: #fbbf24;
+  --chart-4: #34d399;
+  --chart-5: #38bdf8;
+
+  --primary-gradient-from: #d97706;
+  --primary-gradient-to: #b45309;
+  --shadow-1: rgba(217, 119, 6, 0.18);
+  --shadow-2: rgba(180, 83, 9, 0.12);
+
+  --gradient-hero: linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%);
+  --gradient-hero-subtle: linear-gradient(135deg, rgba(120,53,15,0.35) 0%, rgba(217,119,6,0.15) 100%);
+
+  --shimmer-from: #2e2210;
+  --shimmer-via: #3a2c12;
+  --shimmer-to: #2e2210;
+
+  --glass-bg: rgba(254, 243, 199, 0.05);
+  --glass-bg-strong: rgba(254, 243, 199, 0.09);
+  --glass-bg-subtle: rgba(254, 243, 199, 0.025);
+  --glass-border: rgba(254, 243, 199, 0.12);
+  --glass-border-strong: rgba(254, 243, 199, 0.2);
+  --glass-highlight: rgba(254, 243, 199, 0.14);
+  --glass-ring: rgba(254, 243, 199, 0.18);
+  --glass-text: rgba(254, 243, 199, 0.95);
+  --glass-text-muted: rgba(254, 243, 199, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --glass-inset: inset 0 1px 1px rgba(254, 243, 199, 0.08);
+}
+
+/* ============================================
+   FOREST — DARK GREEN THEME
+   ============================================ */
+.forest {
+  --background: #0a140a;
+  --foreground: #f0fdf4;
+
+  --card: #0f1a0f;
+  --card-foreground: #f0fdf4;
+
+  --popover: #0f1a0f;
+  --popover-foreground: #f0fdf4;
+
+  --primary: #16a34a;
+  --primary-foreground: #ffffff;
+
+  --secondary: #162416;
+  --secondary-foreground: #86efac;
+
+  --muted: #162416;
+  --muted-foreground: #6b9e7a;
+
+  --accent: #14532d;
+  --accent-foreground: #4ade80;
+
+  --destructive: #f87171;
+  --destructive-foreground: #0a140a;
+
+  --border: #1e3020;
+  --input: #162416;
+  --ring: #16a34a;
+
+  --surface: #162416;
+  --surface-foreground: #f0fdf4;
+
+  --sidebar: #060e06;
+  --sidebar-foreground: #f0fdf4;
+  --sidebar-primary: #22c55e;
+  --sidebar-primary-foreground: #0a140a;
+  --sidebar-accent: #0f1a0f;
+  --sidebar-accent-foreground: #4ade80;
+  --sidebar-border: #162416;
+  --sidebar-ring: #22c55e;
+
+  --chart-1: #22c55e;
+  --chart-2: #4ade80;
+  --chart-3: #86efac;
+  --chart-4: #fbbf24;
+  --chart-5: #38bdf8;
+
+  --primary-gradient-from: #16a34a;
+  --primary-gradient-to: #15803d;
+  --shadow-1: rgba(22, 163, 74, 0.18);
+  --shadow-2: rgba(21, 128, 61, 0.12);
+
+  --gradient-hero: linear-gradient(135deg, #14532d 0%, #15803d 50%, #16a34a 100%);
+  --gradient-hero-subtle: linear-gradient(135deg, rgba(20,83,45,0.35) 0%, rgba(22,163,74,0.15) 100%);
+
+  --shimmer-from: #162416;
+  --shimmer-via: #1e3020;
+  --shimmer-to: #162416;
+
+  --glass-bg: rgba(240, 253, 244, 0.05);
+  --glass-bg-strong: rgba(240, 253, 244, 0.09);
+  --glass-bg-subtle: rgba(240, 253, 244, 0.025);
+  --glass-border: rgba(240, 253, 244, 0.12);
+  --glass-border-strong: rgba(240, 253, 244, 0.2);
+  --glass-highlight: rgba(240, 253, 244, 0.14);
+  --glass-ring: rgba(240, 253, 244, 0.18);
+  --glass-text: rgba(240, 253, 244, 0.95);
+  --glass-text-muted: rgba(240, 253, 244, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --glass-inset: inset 0 1px 1px rgba(240, 253, 244, 0.08);
+}
+
+/* ============================================
+   OCEAN — DEEP BLUE THEME
+   ============================================ */
+.ocean {
+  --background: #04080f;
+  --foreground: #f0f9ff;
+
+  --card: #060e1a;
+  --card-foreground: #f0f9ff;
+
+  --popover: #060e1a;
+  --popover-foreground: #f0f9ff;
+
+  --primary: #0ea5e9;
+  --primary-foreground: #ffffff;
+
+  --secondary: #0a1626;
+  --secondary-foreground: #7dd3fc;
+
+  --muted: #0a1626;
+  --muted-foreground: #607b96;
+
+  --accent: #0c4a6e;
+  --accent-foreground: #38bdf8;
+
+  --destructive: #f87171;
+  --destructive-foreground: #04080f;
+
+  --border: #122236;
+  --input: #0a1626;
+  --ring: #0ea5e9;
+
+  --surface: #0a1626;
+  --surface-foreground: #f0f9ff;
+
+  --sidebar: #020508;
+  --sidebar-foreground: #f0f9ff;
+  --sidebar-primary: #38bdf8;
+  --sidebar-primary-foreground: #04080f;
+  --sidebar-accent: #060e1a;
+  --sidebar-accent-foreground: #7dd3fc;
+  --sidebar-border: #0a1626;
+  --sidebar-ring: #38bdf8;
+
+  --chart-1: #0ea5e9;
+  --chart-2: #38bdf8;
+  --chart-3: #7dd3fc;
+  --chart-4: #34d399;
+  --chart-5: #fbbf24;
+
+  --primary-gradient-from: #0ea5e9;
+  --primary-gradient-to: #0284c7;
+  --shadow-1: rgba(14, 165, 233, 0.18);
+  --shadow-2: rgba(2, 132, 199, 0.12);
+
+  --gradient-hero: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0ea5e9 100%);
+  --gradient-hero-subtle: linear-gradient(135deg, rgba(12,74,110,0.35) 0%, rgba(14,165,233,0.15) 100%);
+
+  --shimmer-from: #0a1626;
+  --shimmer-via: #122236;
+  --shimmer-to: #0a1626;
+
+  --glass-bg: rgba(240, 249, 255, 0.05);
+  --glass-bg-strong: rgba(240, 249, 255, 0.09);
+  --glass-bg-subtle: rgba(240, 249, 255, 0.025);
+  --glass-border: rgba(240, 249, 255, 0.12);
+  --glass-border-strong: rgba(240, 249, 255, 0.2);
+  --glass-highlight: rgba(240, 249, 255, 0.14);
+  --glass-ring: rgba(240, 249, 255, 0.18);
+  --glass-text: rgba(240, 249, 255, 0.95);
+  --glass-text-muted: rgba(240, 249, 255, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --glass-inset: inset 0 1px 1px rgba(240, 249, 255, 0.08);
+}
+
+/* ============================================
+   ROSE — ROSE/PINK ACCENT THEME
+   ============================================ */
+.rose {
+  --background: #140a10;
+  --foreground: #fff1f2;
+
+  --card: #1a0e16;
+  --card-foreground: #fff1f2;
+
+  --popover: #1a0e16;
+  --popover-foreground: #fff1f2;
+
+  --primary: #e11d48;
+  --primary-foreground: #ffffff;
+
+  --secondary: #22121e;
+  --secondary-foreground: #fda4af;
+
+  --muted: #22121e;
+  --muted-foreground: #9e6878;
+
+  --accent: #4c0519;
+  --accent-foreground: #fb7185;
+
+  --destructive: #f87171;
+  --destructive-foreground: #140a10;
+
+  --border: #2e1826;
+  --input: #22121e;
+  --ring: #e11d48;
+
+  --surface: #22121e;
+  --surface-foreground: #fff1f2;
+
+  --sidebar: #0e070b;
+  --sidebar-foreground: #fff1f2;
+  --sidebar-primary: #fb7185;
+  --sidebar-primary-foreground: #140a10;
+  --sidebar-accent: #1a0e16;
+  --sidebar-accent-foreground: #fda4af;
+  --sidebar-border: #22121e;
+  --sidebar-ring: #fb7185;
+
+  --chart-1: #e11d48;
+  --chart-2: #fb7185;
+  --chart-3: #fda4af;
+  --chart-4: #a78bfa;
+  --chart-5: #fbbf24;
+
+  --primary-gradient-from: #e11d48;
+  --primary-gradient-to: #be123c;
+  --shadow-1: rgba(225, 29, 72, 0.18);
+  --shadow-2: rgba(190, 18, 60, 0.12);
+
+  --gradient-hero: linear-gradient(135deg, #4c0519 0%, #9f1239 50%, #e11d48 100%);
+  --gradient-hero-subtle: linear-gradient(135deg, rgba(76,5,25,0.35) 0%, rgba(225,29,72,0.15) 100%);
+
+  --shimmer-from: #22121e;
+  --shimmer-via: #2e1826;
+  --shimmer-to: #22121e;
+
+  --glass-bg: rgba(255, 241, 242, 0.05);
+  --glass-bg-strong: rgba(255, 241, 242, 0.09);
+  --glass-bg-subtle: rgba(255, 241, 242, 0.025);
+  --glass-border: rgba(255, 241, 242, 0.12);
+  --glass-border-strong: rgba(255, 241, 242, 0.2);
+  --glass-highlight: rgba(255, 241, 242, 0.14);
+  --glass-ring: rgba(255, 241, 242, 0.18);
+  --glass-text: rgba(255, 241, 242, 0.95);
+  --glass-text-muted: rgba(255, 241, 242, 0.55);
+  --glass-blur: 16px;
+  --glass-blur-strong: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --glass-inset: inset 0 1px 1px rgba(255, 241, 242, 0.08);
 }
 
 /* ============================================
@@ -532,13 +1020,59 @@
     animation: shimmer 1.5s ease-in-out infinite;
   }
 
-  /* Glassmorphism utilities */
+  /* Glassmorphism utilities — theme-aware via liquid-glass tokens.
+     These replace the old hardcoded bg-white/10 versions so glass
+     stays legible on both light and dark themes. */
   .glass {
-    @apply backdrop-blur-md bg-white/10 border border-white/20;
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: var(--glass-inset), var(--glass-shadow);
   }
 
   .glass-dark {
-    @apply backdrop-blur-md bg-black/20 border border-white/10;
+    background-color: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border-strong);
+    backdrop-filter: blur(var(--glass-blur-strong));
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+    box-shadow: var(--glass-inset), var(--glass-shadow);
+  }
+
+  /* Reusable liquid-glass panel — a frosted container with the sheen
+     pseudo-elements used across cards, dialogs, popovers, etc. */
+  .glass-panel {
+    position: relative;
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: var(--glass-inset), var(--glass-shadow);
+  }
+
+  /* Top sheen highlight + inner edge, layered on glass-panel.
+     Apply on a ::before via a nested element or this class directly. */
+  .glass-sheen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      var(--glass-highlight) 0%,
+      transparent 45%
+    );
+    opacity: 0.6;
+    z-index: 0;
+  }
+
+  .glass-text {
+    color: var(--glass-text);
+  }
+
+  .glass-text-muted {
+    color: var(--glass-text-muted);
   }
 
   /* Surface — slightly elevated card within a card */

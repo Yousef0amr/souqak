@@ -39,7 +39,29 @@
     "users": "Users",
     "receipts": "Receipts",
     "expenseCategories": "Expense Categories",
-    "unitConversions": "Unit Conversions"
+    "unitConversions": "Unit Conversions",
+    "overview": "Overview",
+    "setup": "Setup",
+    "dining": "Dining",
+    "stores": "Stores",
+    "warehouses": "Warehouses",
+    "categories": "Categories",
+    "brands": "Brands",
+    "units": "Units",
+    "taxes": "Taxes",
+    "tables": "Tables",
+    "modifiers": "Modifiers",
+    "invoices": "Invoices",
+    "salesOrders": "Sales Orders",
+    "purchases": "Purchases",
+    "expenses": "Expenses",
+    "discounts": "Discounts",
+    "coupons": "Coupons",
+    "offers": "Offers",
+    "reports": "Reports",
+    "reportsTitle": "Reports & Analytics",
+    "discountsTitle": "Discounts & Offers",
+    "loyalty": "Loyalty"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -160,5 +182,41 @@
     "units": "Measurement Units",
     "taxes": "VAT & Taxes",
     "users": "System User Accounts"
+  },
+  "businessMode": {
+    "title": "Business Mode",
+    "description": "Choose your business vertical to enable relevant features",
+    "retail": "Retail",
+    "retailDesc": "General retail POS with standard sales flow",
+    "grocery": "Grocery",
+    "groceryDesc": "Supermarket with scale barcodes, weighed products, shelf labels",
+    "restaurant": "Restaurant",
+    "restaurantDesc": "Restaurant with tables, modifiers, order types, and kitchen display"
+  },
+  "tables": {
+    "title": "Table Management",
+    "subtitle": "Manage restaurant table layout and assignments"
+  },
+  "modifiers": {
+    "title": "Product Modifiers",
+    "subtitle": "Manage product modifiers, extras, and variations"
+  },
+  "theme": {
+    "title": "Appearance & Theme",
+    "subtitle": "Customize the look and feel of your dashboard",
+    "mode": "Theme Mode",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "accent": "Accent Color",
+    "cornerStyle": "Corner Style",
+    "sharp": "Sharp",
+    "rounded": "Rounded",
+    "formStyle": "Form Style",
+    "fieldStyle": "Field Style",
+    "sidebarGrouping": "Collapsible Sidebar Groups",
+    "sidebarGroupingDesc": "Let each sidebar section expand or collapse independently",
+    "animationIntensity": "Animation Intensity",
+    "animationIntensityDesc": "Control how much motion and animation effects are used"
   }
 }

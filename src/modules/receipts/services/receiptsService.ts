@@ -2,9 +2,9 @@
 import {
   getApiReceiptsById,
   getApiReceiptsOrderByOrderId,
-  putApiReceiptsById,
 } from "@/config/swagger-apis";
 import { swaggerApiClient } from "@/config/swagger-apis/swaggerApiClient";
+import { apiClient } from "@/lib/api/apiClient";
 
 export interface Receipt {
   id: string;
@@ -56,13 +56,7 @@ export const receiptsService = {
   },
 
   void: async (id: string): Promise<Receipt> => {
-    const response = await putApiReceiptsById({
-      client: swaggerApiClient,
-      path: { id },
-      body: { void: true } as any,
-      responseStyle: "data",
-      throwOnError: true,
-    });
-    return mapDto((response as any)?.data ?? response);
+    const response = await apiClient.put(`/receipts/${id}`, { void: true });
+    return mapDto(response.data);
   },
 };

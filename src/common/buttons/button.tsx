@@ -2,13 +2,19 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/config/shadcnUtils";
 
+/**
+ * Glass Button — liquid-glass styling driven by per-theme tokens
+ * (see `--glass-*` in globals.css). Preserves the shadcn Button API:
+ * variants { default, destructive, outline, secondary, ghost, link },
+ * sizes, `asChild`, and `data-slot="button"`.
+ */
 const buttonVariants = cva(
   [
     // Base
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap",
+    "relative inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "rounded-xl text-sm font-semibold",
-    // Transition — lift + color
-    "transition-all duration-200",
+    // Transition
+    "transition-all duration-200 ease-out",
     // Focus ring
     "outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-1",
     // Disabled
@@ -21,33 +27,38 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // ── Primary — solid, lifts on hover
+        // ── Default — frosted primary fill with glass sheen
         default: [
-          "bg-primary text-primary-foreground",
-          "shadow-[0_1px_3px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.1)]",
-          "hover:brightness-110 hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)]",
+          "text-primary-foreground",
+          "bg-primary shadow-[0_4px_16px_var(--shadow-1)]",
+          "hover:brightness-110 hover:-translate-y-px hover:shadow-[0_6px_20px_var(--shadow-1)]",
           "active:translate-y-0 active:brightness-100",
+          "before:absolute before:inset-0 before:rounded-xl before:pointer-events-none before:opacity-60",
+          "before:bg-linear-to-b before:from-white/25 before:to-transparent",
         ].join(" "),
 
-        // ── Destructive — red, same lift
+        // ── Destructive — red glass
         destructive: [
           "bg-destructive text-white",
-          "shadow-[0_1px_3px_rgba(239,68,68,0.3)]",
-          "hover:bg-destructive/90 hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(239,68,68,0.3)]",
+          "shadow-[0_4px_16px_rgba(239,68,68,0.3)]",
+          "hover:bg-destructive/90 hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(239,68,68,0.35)]",
           "active:translate-y-0",
           "focus-visible:ring-destructive/40",
+          "before:absolute before:inset-0 before:rounded-xl before:pointer-events-none before:opacity-50",
+          "before:bg-linear-to-b before:from-white/20 before:to-transparent",
         ].join(" "),
 
-        // ── Outline — bordered, ghost fill on hover
+        // ── Outline — glass-bordered, fill on hover
         outline: [
-          "border-2 border-border bg-transparent text-foreground",
-          "hover:bg-muted hover:border-border hover:-translate-y-px",
+          "border bg-[var(--glass-bg-strong)] text-foreground backdrop-blur-xl",
+          "border-[var(--glass-border-strong)] shadow-[var(--glass-inset)]",
+          "hover:-translate-y-px hover:bg-[var(--glass-bg)]",
           "active:translate-y-0",
         ].join(" "),
 
-        // ── Secondary — muted fill
+        // ── Secondary — muted glass fill
         secondary: [
-          "bg-secondary text-secondary-foreground",
+          "bg-secondary text-secondary-foreground backdrop-blur-md",
           "hover:bg-secondary/80 hover:-translate-y-px",
           "active:translate-y-0",
         ].join(" "),

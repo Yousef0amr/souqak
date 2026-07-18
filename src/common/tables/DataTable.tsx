@@ -57,7 +57,7 @@ function EmptyState({
     <TableRow className="hover:bg-transparent border-0">
       <TableCell colSpan={colSpan} className="h-48 text-center border-0">
         <div className="flex flex-col items-center gap-3 py-8">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-muted/60">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--glass-bg-subtle)] backdrop-blur-md border border-[var(--glass-border)]">
             <FileX2 className="h-7 w-7 text-muted-foreground/60" />
           </div>
           <div className="space-y-1">
@@ -139,7 +139,10 @@ export function DataTable<TData>({
     <div className="w-full">
       <div
         className={cn(
-          "rounded-xl border border-border/50 bg-card shadow-sm overflow-hidden",
+          "relative rounded-xl overflow-hidden",
+          // Glass panel (theme-aware)
+          "bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)]",
+          "shadow-[var(--glass-inset),var(--glass-shadow)]",
           wrapperClassName
         )}
       >

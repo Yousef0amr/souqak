@@ -11,8 +11,9 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
       data-slot="checkbox"
       className={cn(
         // Base
-        "peer size-5 shrink-0 rounded-md border border-input",
-        "bg-background shadow-xs",
+        "peer size-5 shrink-0 rounded-md border",
+        "bg-[var(--glass-bg-strong)] backdrop-blur-md shadow-[var(--glass-inset)]",
+        "border-[var(--glass-border-strong)]",
         // Transition
         "transition-all duration-150",
         // Focus
